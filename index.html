@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Simon — عالم الفراشات</title>
+<title>Simon — عالم فراشات سيمون</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -119,8 +119,8 @@ canvas{position:fixed;inset:0;display:block}
 <div id="intro">
   <canvas id="introC"></canvas>
   <div class="i-title">Simon</div>
-  <div class="i-sub">عالم الفراشات ✦ مرحباً بيكِ يا سيمون</div>
-  <div class="i-q">إنتِ سيمون؟ اختاري فراشتك 🌸</div>
+  <div class="i-sub">عالم فراشات سيمون 🌸</div>
+  <div class="i-q">سيمون اختاري فراشتك يا فراشه🌸</div>
   <div id="picker">
     <button class="pb" style="color:var(--rose);border-color:var(--rose)" onclick="pick(this,'rose')">🦋 الوردية</button>
     <button class="pb" style="color:var(--lav);border-color:var(--lav)" onclick="pick(this,'lav')">💜 البنفسجية</button>
@@ -176,7 +176,7 @@ const COLORS = {
 const BF = [
   { id:'simon', name:'سيمون 🦋', color:'rose', x:.50, y:.44, r:80, speed:.018,
     data:{title:'سيمون',sub:'فراشة عسل من النوع النادر',
-      cards:[{i:'🦋',t:'زي الفراشة',b:'بتيجي تضوي المكان وكأن حاجة اتغيرت'},{i:'🌸',t:'جميلة طبيعي',b:'مش محتاجة تتكلفي — الجمال ده أصيل'},{i:'⚡',t:'نفس الطاقة',b:'وحاجة فيكِ بتقول "ده الكلام" من غير ما تشرحي'},{i:'✨',t:'نادرة',b:'زي الفراشة النادرة — مش بتلاقيها كتير'}],
+      cards:[{i:'🦋',t:'زي الفراشة',b:'بتيجي تضوي المكان وكأن حاجة اتغيرت'},{i:'🌸',t:'جميلة طبيعي',b:'مش محتاجة تتكلفي — الجمال ده أصيل فيكي '},{i:'⚡',t:'نفس الطاقة',b:'وحاجة فيكِي بتقول "ده الكلام" من غير ما تشرحي'},{i:'✨',t:'نادرة',b:'زي الفراشة النادرة — مش بتلاقيها كتير'}],
       quote:'"فيه ناس زي الفراشات — بمجرد ما بتيجي بتحس إن الدنيا أجمل"',tw:true,boom:false}},
 
   { id:'energy', name:'طاقتها 🔥', color:'lav', x:.16, y:.30, r:58, speed:.026,
@@ -186,7 +186,7 @@ const BF = [
 
   { id:'mind', name:'فكرها 💡', color:'mint', x:.84, y:.28, r:52, speed:.031,
     data:{title:'فكرها',sub:'دماغ بتشوف الدنيا بطريقتها',
-      cards:[{i:'💡',t:'زوايا مختلفة',b:'بتشوفي حاجات الناس بتعدي عليها'},{i:'🧠',t:'دماغ تانية',b:'مش بتفكري زي الناس وده أحسن حاجة'},{i:'🎲',t:'غير متوقعة',b:'الكلام معاكِ دايماً ممتع'},{i:'🌿',t:'هادية',b:'رأيك بيهدي حتى لو الكلام كتير'}],
+      cards:[{i:'💡',t:'زوايا مختلفة',b:'بتشوفي حاجات الناس بتعدي عليها'},{i:'🧠',t:'دماغ تانية',b:'مش بتفكري زي الناس وده أحسن حاجة'},{i:'🎲',t:'غير متوقعة',b:'الكلام معاكِي دايماً ممتع'},{i:'🌿',t:'هادية',b:'رأيك بيهدي حتى لو الكلام كتير'}],
       quote:'"الناس اللي بتشوف الدنيا بطريقة مختلفة هم اللي بيغيروها"',tw:false,boom:false}},
 
   { id:'smile', name:'ابتسامتها ☀️', color:'gold', x:.20, y:.68, r:62, speed:.022,
@@ -196,7 +196,7 @@ const BF = [
 
   { id:'friend', name:'صداقتها 🌸', color:'peach', x:.80, y:.66, r:50, speed:.028,
     data:{title:'صداقتها',sub:'النوع اللي بيفرق فعلاً',
-      cards:[{i:'🤝',t:'حقيقية',b:'مش شكلية — بتحسي إنها صادقة'},{i:'🌸',t:'مريحة',b:'معاكِ مش لازم تتكلفي — بتبقي أنتِ'},{i:'⚡',t:'متشابهين',b:'نفس النكات ونفس الردود بالظبط'},{i:'🎯',t:'سعيد بيها',b:'مبسوط إني عرفتك يا سيمون'}],
+      cards:[{i:'🤝',t:'حقيقية',b:'شخص حقيقي-وصادق جدا'},{i:'🌸',t:'مريحة',b:'الواحد لما بيتكلم معاكي بيحس بي راحه نفسيه'},{i:'⚡',t:'متشابهين',b:'لقيتك شبهي في حاجات كتير ودي صدفه جميله '},{i:'🎯',t:'سعيد بيها',b:'مبسوط إني عرفتك يا سيمون'}],
       quote:'"أحسن حاجة في الحياة هي الناس اللي بتخليكِ تبقي أنتِ"',tw:false,boom:false}},
 
   { id:'moon', name:'القمر 🌙', color:'moon', x:.50, y:.74, r:46, speed:.035,
@@ -800,7 +800,7 @@ function openPanel(bfObj){
     <div class="cgrid">${cards}</div>
     ${d.tw?`<div class="twline" style="color:${hexC}"><span id="twEl"></span><span class="twc" style="background:${hexC}"></span></div>`:''}
     <div class="pquote">${d.quote}</div>
-    ${d.boom?`<button class="bbtn" onclick="boom()">🎆 احتفلي بيكِ ✨</button>`:''}
+    ${d.boom?`<button class="bbtn" onclick="boom()">🎆 دوسي هنا ده احتفال صغير اني عرفتك✨</button>`:''}
   `;
 
   $('panel').classList.add('open');
@@ -818,7 +818,7 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape')closePanel(); });
 // ═══════════════════════════════════════════
 // TYPEWRITER
 // ═══════════════════════════════════════════
-const phrases=['مبسوطة إنكِ هنا يا سيمون 🦋','إنتِ شبهي بشكل غريب ⚡','إنتِ حلوة جداً زي الفراشة 🌸','سيمون = نادرة من أصلها 🔥','الكون اتحسن لما إنتِ فيه 🌌','مبسوط بيكِ كده ✨','مش في ناس زيكِ كتير 💫'];
+const phrases=['مبسوط إنكِ هنا يا سيمون 🦋','إنتِي شبهي بشكل غريب ⚡','إنتِي حلوة جداً زي الفراشة 🌸','سيمون = فراشة نادرة من أصلها 🔥','الكون اتحسن لما إنتِي فيه 🌌','مبسوط بيكِي كده ✨','مفيش زيك 💫'];
 function startTw(hexC){
   if(twOn)return; twOn=true; tpi=0; tci=0; tdel=false;
   const el=$('twEl'); if(!el)return; el.textContent='';

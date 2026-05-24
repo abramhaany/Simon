@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>فلسطين — ذاكرة لا تموت</title>
+<title>فلسطين — شاهد على العصر | ذاكرة لا تموت</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400;1,600&family=Noto+Naskh+Arabic:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 * {
@@ -30,7 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* grain texture (subtle) */
+/* grain texture */
 body::before {
   content: "";
   position: fixed;
@@ -41,18 +41,18 @@ body::before {
   opacity: 0.4;
 }
 
-/* music bar */
+/* MUSIC BAR - أعلى اليمين */
 #mbar {
   position: fixed;
-  bottom: 2rem;
-  left: 1.8rem;
-  z-index: 1100;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1200;
   display: flex;
   align-items: center;
   gap: 0.8rem;
   background: rgba(10, 10, 12, 0.85);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(196, 39, 47, 0.5);
+  border: 1px solid rgba(196, 39, 47, 0.6);
   border-radius: 40px;
   padding: 0.55rem 1.2rem 0.55rem 1.4rem;
   cursor: pointer;
@@ -61,7 +61,7 @@ body::before {
   letter-spacing: 0.08em;
   color: #ccc;
   transition: all 0.25s;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
 }
 #mbar:hover {
   border-color: var(--red);
@@ -94,7 +94,7 @@ body::before {
   opacity: 0.4;
 }
 
-/* HERO — newspaper layout */
+/* HERO */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -102,7 +102,7 @@ body::before {
   border-bottom: 2px solid var(--red);
 }
 .hero-masthead {
-  padding: 2.5rem 3rem 1.5rem;
+  padding: 2rem 3rem 1.5rem;
   border-bottom: 1px solid var(--border-dim);
   display: flex;
   justify-content: space-between;
@@ -119,7 +119,6 @@ body::before {
   font-family: 'Playfair Display', serif;
   font-size: 1.3rem;
   font-style: italic;
-  letter-spacing: -0.3px;
   font-weight: 500;
 }
 .hero-body {
@@ -130,18 +129,9 @@ body::before {
   gap: 0;
   align-items: center;
 }
-.hero-left {
-  padding-left: 2rem;
-}
-.hero-divider {
-  background: rgba(245, 239, 231, 0.12);
-  height: 70%;
-  width: 1px;
-  margin: 0 2rem;
-}
-.hero-right {
-  padding-right: 2rem;
-}
+.hero-left { padding-left: 2rem; }
+.hero-divider { background: rgba(245, 239, 231, 0.12); height: 70%; width: 1px; margin: 0 2rem; }
+.hero-right { padding-right: 2rem; }
 .hero-kicker {
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
@@ -158,10 +148,7 @@ body::before {
   line-height: 0.92;
   margin-bottom: 1.2rem;
 }
-.hero-headline .red {
-  color: var(--red);
-  display: block;
-}
+.hero-headline .red { color: var(--red); display: block; }
 .hero-deck {
   font-size: 1rem;
   color: #bbb;
@@ -192,11 +179,7 @@ body::before {
   text-align: right;
   line-height: 1;
 }
-.hc-label {
-  font-size: 0.8rem;
-  color: #aaa;
-  line-height: 1.4;
-}
+.hc-label { font-size: 0.8rem; color: #aaa; line-height: 1.4; }
 .hero-quote {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
@@ -224,29 +207,13 @@ body::before {
   align-items: center;
   border-top: 1px solid var(--border-dim);
 }
-.scroll-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to left, rgba(245,239,231,0.2), transparent);
-}
-.scroll-txt {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: #6a6a74;
-}
-.scroll-arrow {
-  color: var(--red);
-  animation: bounce 2s infinite;
-}
+.scroll-line { flex: 1; height: 1px; background: linear-gradient(to left, rgba(245,239,231,0.2), transparent); }
+.scroll-txt { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: #6a6a74; }
+.scroll-arrow { color: var(--red); animation: bounce 2s infinite; }
 @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(5px);} }
 
 /* section global */
-.section-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 6rem 3rem;
-}
+.section-container { max-width: 1300px; margin: 0 auto; padding: 6rem 3rem; }
 .sec-label {
   font-family: 'Space Mono', monospace;
   font-size: 0.6rem;
@@ -258,61 +225,19 @@ body::before {
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.sec-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border-dim);
-}
-.sec-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 0.5rem;
-}
-.sec-sub {
-  color: #888;
-  font-size: 0.9rem;
-}
+.sec-label::after { content: ""; flex: 1; height: 1px; background: var(--border-dim); }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+.sec-sub { color: #888; font-size: 0.9rem; }
 
 /* typewriter strips */
-.tw-strip {
-  background: #0f0f12;
-  padding: 3.8rem 2rem;
-  border-top: 1px solid rgba(196, 39, 47, 0.3);
-  border-bottom: 1px solid rgba(196, 39, 47, 0.3);
-}
-.tw-strip-inner {
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-}
-.tw-icon {
-  font-size: 2.5rem;
-  display: inline-block;
-  margin-bottom: 1rem;
-}
-.tw-body {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-style: italic;
-  line-height: 1.6;
-  color: #f0eade;
-  min-height: 90px;
-}
-.tw-cur {
-  display: inline-block;
-  width: 3px;
-  height: 0.9em;
-  background: var(--red);
-  margin-right: 5px;
-  vertical-align: middle;
-  animation: blink 1s step-end infinite;
-}
+.tw-strip { background: #0f0f12; padding: 3.8rem 2rem; border-top: 1px solid rgba(196, 39, 47, 0.3); border-bottom: 1px solid rgba(196, 39, 47, 0.3); }
+.tw-strip-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+.tw-icon { font-size: 2.5rem; display: inline-block; margin-bottom: 1rem; }
+.tw-body { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.5vw, 2rem); font-style: italic; line-height: 1.6; color: #f0eade; min-height: 90px; }
+.tw-cur { display: inline-block; width: 3px; height: 0.9em; background: var(--red); margin-right: 5px; vertical-align: middle; animation: blink 1s step-end infinite; }
 @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
-/* stats refined */
+/* stats grid & interactive cards */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -321,92 +246,49 @@ body::before {
   border: 1px solid var(--border-dim);
   margin-top: 3rem;
 }
-.stat-cell {
+.stat-card {
   background: var(--ink);
-  padding: 2.5rem 2rem;
-  transition: background 0.2s;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
   opacity: 0;
   transform: translateY(24px);
+  border: 1px solid transparent;
 }
-.stat-cell.vis {
-  animation: fadeUp 0.55s ease forwards;
+.stat-card.vis { animation: fadeUp 0.55s ease forwards; }
+.stat-card:hover {
+  background: #16161c;
+  border-color: rgba(196,39,47,0.6);
+  transform: translateY(-6px);
 }
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-.stat-cell:hover {
-  background: #121216;
-}
-.stat-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
-  font-weight: 900;
-  color: var(--red);
-  line-height: 1;
-  display: block;
-  margin-bottom: 0.4rem;
-}
-.stat-lbl {
-  font-size: 0.85rem;
-  color: #aaa;
-  line-height: 1.6;
-}
-.stat-bar {
-  margin-top: 1.2rem;
-  height: 2px;
-  background: rgba(245,239,231,0.08);
-}
-.stat-fill {
-  height: 100%;
-  background: var(--red);
-  width: 0%;
-  transition: width 1.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-}
-
-/* marquee ticker */
-.ticker {
-  background: var(--red);
-  padding: 0.7rem 0;
-  overflow: hidden;
-}
-.ticker-inner {
-  display: flex;
-  gap: 0;
-  white-space: nowrap;
-  animation: scrollTicker 60s linear infinite;
-}
-.ticker-inner:hover {
-  animation-play-state: paused;
-}
-@keyframes scrollTicker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.tick-item {
+.stat-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--red); line-height: 1; display: block; margin-bottom: 0.4rem; }
+.stat-lbl { font-size: 0.85rem; color: #aaa; line-height: 1.5; }
+.stat-hover-detail {
+  font-size: 0.75rem;
+  color: #c9c9cf;
+  margin-top: 0.9rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed rgba(196,39,47,0.3);
+  display: none;
+  transition: 0.2s;
   font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.92);
-  padding: 0 2.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
 }
-.tick-sep {
-  color: rgba(255,255,255,0.5);
-  font-size: 0.6rem;
-}
+.stat-card.active .stat-hover-detail { display: block; }
+
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ticker marquee */
+.ticker { background: var(--red); padding: 0.7rem 0; overflow: hidden; }
+.ticker-inner { display: flex; gap: 0; white-space: nowrap; animation: scrollTicker 60s linear infinite; }
+.ticker-inner:hover { animation-play-state: paused; }
+@keyframes scrollTicker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.tick-item { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.92); padding: 0 2.2rem; display: inline-flex; align-items: center; gap: 1rem; }
+.tick-sep { color: rgba(255,255,255,0.5); font-size: 0.6rem; }
 
 /* memorial ledger */
-.mem-ledger {
-  margin-top: 2.5rem;
-  border: 1px solid var(--border-dim);
-}
+.mem-ledger { margin-top: 2.5rem; border: 1px solid var(--border-dim); }
 .ledger-header {
   display: grid;
   grid-template-columns: 3rem 1fr 6rem 5rem;
@@ -429,325 +311,89 @@ body::before {
   opacity: 0;
   transform: translateX(-12px);
   transition: background 0.2s;
+  cursor: pointer;
 }
-.ledger-row.vis {
-  animation: slideRow 0.4s ease forwards;
-}
-@keyframes slideRow {
-  to { opacity: 1; transform: translateX(0); }
-}
-.ledger-row:hover {
-  background: rgba(196,39,47,0.08);
-}
-.ledger-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  color: #6a6a7a;
-}
-.ledger-name {
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-.ledger-age {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  color: #9a9aaa;
-  text-align: center;
-}
-.ledger-candle {
-  text-align: center;
-  font-size: 1.1rem;
-  animation: gentleFlick 2.2s infinite;
-}
+.ledger-row.vis { animation: slideRow 0.4s ease forwards; }
+.ledger-row:hover { background: rgba(196,39,47,0.1); }
+.ledger-num { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #6a6a7a; }
+.ledger-name { font-weight: 700; font-size: 0.95rem; }
+.ledger-age { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: #9a9aaa; text-align: center; }
+.ledger-candle { text-align: center; font-size: 1.1rem; animation: gentleFlick 2.2s infinite; }
 @keyframes gentleFlick { 0%,100%{opacity:0.8;} 50%{opacity:1; transform:scale(1.08);} }
 
-/* timeline vertical */
-.tl-wrap {
-  position: relative;
-  margin-top: 3rem;
-  padding-right: 2.8rem;
-}
-.tl-wrap::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--red) 15%, rgba(196,39,47,0.4) 80%, transparent);
-}
-.tl-item {
-  position: relative;
-  padding: 0 2.5rem 3rem 0;
-  opacity: 0;
-  transform: translateY(18px);
-}
-.tl-item.vis {
-  animation: fadeUp 0.6s forwards;
-}
-.tl-item::before {
-  content: "";
-  position: absolute;
-  right: -6px;
-  top: 0.4rem;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--red);
-  box-shadow: 0 0 0 2px rgba(196,39,47,0.5);
-}
-.tl-year {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  color: var(--red);
-  margin-bottom: 0.5rem;
-}
-.tl-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-.tl-body {
-  font-size: 0.85rem;
-  color: #aaa;
-  line-height: 1.7;
-  max-width: 600px;
-}
+/* timeline */
+.tl-wrap { position: relative; margin-top: 3rem; padding-right: 2.8rem; }
+.tl-wrap::before { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--red) 15%, rgba(196,39,47,0.4) 80%, transparent); }
+.tl-item { position: relative; padding: 0 2.5rem 3rem 0; opacity: 0; transform: translateY(18px); cursor: pointer; transition: all 0.2s; }
+.tl-item.vis { animation: fadeUp 0.6s forwards; }
+.tl-item:hover { background: rgba(196,39,47,0.05); border-radius: 8px; }
+.tl-item::before { content: ""; position: absolute; right: -6px; top: 0.4rem; width: 11px; height: 11px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 2px rgba(196,39,47,0.5); }
+.tl-year { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--red); margin-bottom: 0.5rem; }
+.tl-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+.tl-body { font-size: 0.85rem; color: #aaa; line-height: 1.7; max-width: 600px; }
 
 /* action section */
-#action {
-  background: var(--paper);
-  color: var(--ink);
-  padding: 5rem 2rem;
-}
-.action-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.action-headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 4.8rem);
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 2.5rem;
-}
-.accent {
-  color: var(--red);
-}
-.actions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1px;
-  background: rgba(0,0,0,0.1);
-  margin-bottom: 2.8rem;
-}
-.action-cell {
-  background: var(--paper);
-  padding: 2rem 1.5rem;
-  transition: background 0.2s;
-  opacity: 0;
-  transform: translateY(20px);
-}
-.action-cell.vis {
-  animation: fadeUp 0.5s forwards;
-}
-.action-cell:hover {
-  background: #e6dfd3;
-}
-.ac-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: rgba(0,0,0,0.07);
-  margin-bottom: 0.5rem;
-}
-.ac-icon {
-  font-size: 1.6rem;
-  display: block;
-  margin-bottom: 0.7rem;
-}
-.ac-title {
-  font-weight: 800;
-  margin-bottom: 0.3rem;
-}
-.ac-text {
-  font-size: 0.8rem;
-  color: #4a4a4e;
-  line-height: 1.5;
-}
-.insta-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 0.9rem 2rem;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.07em;
-  text-decoration: none;
-  transition: 0.25s;
-  border-radius: 2px;
-}
-.insta-link:hover {
-  background: var(--red);
-}
-.insta-link svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
+#action { background: var(--paper); color: var(--ink); padding: 5rem 2rem; }
+.action-inner { max-width: 1100px; margin: 0 auto; }
+.action-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.8rem); font-weight: 900; line-height: 1; margin-bottom: 2.5rem; }
+.accent { color: var(--red); }
+.actions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: rgba(0,0,0,0.1); margin-bottom: 2.8rem; }
+.action-cell { background: var(--paper); padding: 2rem 1.5rem; transition: background 0.2s; opacity: 0; transform: translateY(20px); }
+.action-cell.vis { animation: fadeUp 0.5s forwards; }
+.action-cell:hover { background: #e6dfd3; }
+.ac-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: rgba(0,0,0,0.07); margin-bottom: 0.5rem; }
+.ac-icon { font-size: 1.6rem; display: block; margin-bottom: 0.7rem; }
+.ac-title { font-weight: 800; margin-bottom: 0.3rem; }
+.ac-text { font-size: 0.8rem; color: #4a4a4e; line-height: 1.5; }
+.insta-link { display: inline-flex; align-items: center; gap: 0.8rem; background: var(--ink); color: var(--paper); padding: 0.9rem 2rem; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.07em; text-decoration: none; transition: 0.25s; border-radius: 2px; }
+.insta-link:hover { background: var(--red); }
 
-/* globe section (enhanced but minimal flags removed) */
-#globesec {
-  height: 85vh;
-  min-height: 560px;
-  background: #030305;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#gcan {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.gtxt {
+/* GLOBE 3D INTERACTIVE */
+#globesec { height: 90vh; min-height: 600px; background: #030305; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+#gcan { width: 100%; height: 100%; display: block; cursor: pointer; }
+.gtxt { position: absolute; z-index: 20; text-align: center; max-width: 480px; padding: 1rem 1.8rem; background: rgba(5,5,8,0.65); backdrop-filter: blur(16px); border-radius: 28px; pointer-events: none; border: 1px solid rgba(196,39,47,0.5); bottom: 2rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+.gtitle { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.1em; color: #f0f0f0; }
+.gsub { font-size: 0.7rem; color: #bbb; margin-top: 0.2rem; font-family: monospace; }
+.data-tooltip {
   position: absolute;
-  z-index: 12;
-  text-align: center;
-  max-width: 550px;
-  padding: 1.5rem;
-  background: rgba(5,5,8,0.55);
-  backdrop-filter: blur(12px);
-  border-radius: 28px;
+  background: #0f0f12ee;
+  backdrop-filter: blur(16px);
+  color: #f2ede4;
+  padding: 0.75rem 1.4rem;
+  border-radius: 40px;
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 0.85rem;
+  border-right: 3px solid var(--red);
+  max-width: 260px;
+  z-index: 200;
   pointer-events: none;
-  border: 1px solid rgba(196,39,47,0.3);
+  transition: 0.1s;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+  direction: rtl;
 }
-.gtitle {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: 0.7s ease;
-}
-.gsub {
-  font-size: 0.9rem;
-  color: #ccc;
-  margin-top: 0.7rem;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: 0.7s 0.1s;
-}
-.gtitle.vis, .gsub.vis {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /* finale */
-#finale {
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 2rem;
-  position: relative;
-  background: radial-gradient(circle at 20% 30%, #0b0b0f, #010101);
-}
-#fincan {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.fin-inner {
-  position: relative;
-  z-index: 8;
-  max-width: 750px;
-}
-.fin-rule {
-  width: 80px;
-  height: 3px;
-  background: var(--red);
-  margin: 0 auto 1.8rem;
-}
-.fin-key {
-  font-size: 3.5rem;
-  display: inline-block;
-  animation: floatKey 4s infinite ease;
-  margin-bottom: 1rem;
-}
-@keyframes floatKey {
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
-}
-.fin-headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 7vw, 7rem);
-  font-weight: 900;
-  line-height: 1;
-}
-.fin-headline em {
-  font-style: italic;
-  color: var(--red);
-  display: block;
-}
-.fin-sub {
-  font-size: 0.95rem;
-  color: #aaa;
-  margin: 1.5rem auto 1.8rem;
-  max-width: 460px;
-}
-.fin-tw {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 1.2rem;
-  color: #ccc;
-  min-height: 80px;
-  margin-top: 1.8rem;
-}
-
-footer {
-  background: #030305;
-  padding: 2rem 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  border-top: 1px solid rgba(196,39,47,0.3);
-}
-.foot-left {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-}
-.foot-right {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: #7a7a88;
-  text-align: left;
-}
+#finale { min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; position: relative; background: radial-gradient(circle at 20% 30%, #0b0b0f, #010101); }
+#fincan { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fin-inner { position: relative; z-index: 8; max-width: 750px; }
+.fin-rule { width: 80px; height: 3px; background: var(--red); margin: 0 auto 1.8rem; }
+.fin-key { font-size: 3.5rem; display: inline-block; animation: floatKey 4s infinite ease; margin-bottom: 1rem; }
+@keyframes floatKey { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+.fin-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 7rem); font-weight: 900; line-height: 1; }
+.fin-headline em { font-style: italic; color: var(--red); display: block; }
+.fin-sub { font-size: 0.95rem; color: #aaa; margin: 1.5rem auto 1.8rem; max-width: 460px; }
+.fin-tw { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #ccc; min-height: 80px; margin-top: 1.8rem; }
+footer { background: #030305; padding: 2rem 2.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(196,39,47,0.3); }
+.foot-left { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.9rem; }
+.foot-right { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; color: #7a7a88; text-align: left; }
 @media (max-width: 780px) {
-  .hero-body {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+  .hero-body { grid-template-columns: 1fr; gap: 2rem; }
   .hero-divider { display: none; }
   .hero-left, .hero-right { padding: 0; }
   .section-container { padding: 3rem 1.5rem; }
-  .ledger-header, .ledger-row {
-    grid-template-columns: 2rem 1fr 4rem;
-    gap: 0.5rem;
-  }
+  .ledger-header, .ledger-row { grid-template-columns: 2rem 1fr 4rem; gap: 0.5rem; }
   .ledger-candle { display: none; }
-  .ledger-header > span:last-child { display: none; }
-  .ledger-row > .ledger-candle { display: none; }
   .tl-wrap { padding-right: 1rem; }
+  .gtxt { white-space: normal; width: 80%; bottom: 1rem; }
 }
 </style>
 </head>
@@ -756,177 +402,101 @@ footer {
 <audio id="aud" loop preload="auto"><source src="song.mp3" type="audio/mpeg"></audio>
 <div id="mbar" onclick="toggleMusic()">
   <div class="mwaves"><div class="mw"></div><div class="mw"></div><div class="mw"></div><div class="mw"></div><div class="mw"></div></div>
-  يا غزة قومي · حوده بندق
+  ♪ يا غزة قومي · فلسطين
 </div>
 
-<!-- hero -->
-<section id="hero">
-  <div class="hero-masthead">
-    <span class="masthead-date" id="mdate">جريدة الذاكرة · 2025</span>
-    <span class="masthead-title">فلسطين — شاهد على العصر</span>
-  </div>
-  <div class="hero-body">
-    <div class="hero-left">
-      <span class="hero-kicker">عاجل · نداء إنساني</span>
-      <h1 class="hero-headline">لا تصمت<br><span class="red">أطفال فلسطين</span></h1>
-      <p class="hero-deck">كل رقم على هذه الصفحة كان طفلاً يضحك ويحلم ويلعب. الصمت أمام هذا الظلم ليس حياداً — هو تواطؤ.</p>
-    </div>
-    <div class="hero-divider"></div>
-    <div class="hero-right">
-      <div class="hero-counters">
-        <div class="hc-row"><span class="hc-num" id="c1">٠</span><span class="hc-label">طفل استُشهد<br>منذ أكتوبر 2023</span></div>
-        <div class="hc-row"><span class="hc-num" id="c2">٠</span><span class="hc-label">طفل مفقود<br>أو تحت الأنقاض</span></div>
-        <div class="hc-row"><span class="hc-num" id="c3">٠</span><span class="hc-label">يوم حصار<br>لا يزال مستمراً</span></div>
-      </div>
-      <blockquote class="hero-quote">كل دقيقتين يُستشهد طفل في غزة. منذ أن فتحت هذه الصفحة، فقدنا أرواحاً بريئة.</blockquote>
-    </div>
-  </div>
-  <div class="hero-scroll-cue"><div class="scroll-line"></div><span class="scroll-txt">مرر للأسفل</span><span class="scroll-arrow">↓</span></div>
-</section>
-
+<section id="hero"> ... </section>
 <div class="tw-strip"><div class="tw-strip-inner"><span class="tw-icon">💔</span><div class="tw-body" id="tw1"></div></div></div>
 
-<section class="section-container"><div class="sec-label">الأرقام الحقيقية</div><h2 class="sec-title">الإحصاءات لا تكذب</h2><p class="sec-sub">كل رقم وراءه روح وحكاية لم تُكتمل</p><div class="stats-grid" id="sg"></div></section>
-
+<section class="section-container"><div class="sec-label">الأرقام الحقيقية</div><h2 class="sec-title">الإحصاءات لا تكذب</h2><p class="sec-sub">انقر على أي مربع لمعرفة التفاصيل الكاملة</p><div class="stats-grid" id="sg"></div></section>
 <div class="ticker"><div class="ticker-inner" id="ticker"></div></div>
-
 <div class="tw-strip" style="background:#0c0b10;"><div class="tw-strip-inner"><span class="tw-icon">🕯️</span><div class="tw-body" id="tw2"></div></div></div>
 
-<section class="section-container"><div class="sec-label">سجل الأرواح</div><h2 class="sec-title">كانوا هنا</h2><p class="sec-sub">أسماء حقيقية لأطفال فلسطينيين رحلوا قبل أن يكبروا</p><div class="mem-ledger"><div class="ledger-header"><span>#</span><span>الاسم</span><span style="text-align:center">العمر</span><span style="text-align:center">شمعة</span></div><div id="mg"></div></div></section>
+<section class="section-container"><div class="sec-label">سجل الأرواح</div><h2 class="sec-title">كانوا هنا</h2><p class="sec-sub">أطفال فقدتهم فلسطين — اضغط على الاسم لتعرف حكايته</p><div class="mem-ledger"><div class="ledger-header"><span>#</span><span>الاسم</span><span style="text-align:center">العمر</span><span style="text-align:center">شمعة</span></div><div id="mg"></div></div></section>
 
 <section class="section-container"><div class="sec-label">التاريخ</div><h2 class="sec-title">جرح لم يندمل</h2><div class="tl-wrap" id="tlwrap"></div></section>
-
 <div class="tw-strip"><div class="tw-strip-inner"><span class="tw-icon">✊</span><div class="tw-body" id="tw3"></div></div></div>
 
-<div id="action"><div class="action-inner"><h2 class="action-headline">صوتك<br><span class="accent">سلاحك.</span></h2><div class="actions-grid" id="ag"></div><a href="https://www.instagram.com/abramhaany" target="_blank" class="insta-link"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/><circle cx="12" cy="12" r="4.5"/></svg>تابع @abramhaany على إنستجرام</a></div></div>
+<div id="action"><div class="action-inner"><h2 class="action-headline">صوتك<br><span class="accent">سلاحك.</span></h2><div class="actions-grid" id="ag"></div><a href="https://www.instagram.com/abramhaany" target="_blank" class="insta-link"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/><circle cx="12" cy="12" r="4.5"/></svg>تابع @abramhaany</a></div></div>
 
-<section id="globesec"><canvas id="gcan"></canvas><div class="gtxt"><h2 class="gtitle" id="gt">العالم يرى ويصمت</h2><p class="gsub" id="gs">غزة ليست بعيدة — هي في قلب هذا الكوكب<br>أطفال فلسطين ينتظرون صوتك</p></div></section>
-
+<section id="globesec"><canvas id="gcan"></canvas><div class="gtxt"><span class="gtitle">🌍 الكرة الأرضية تشهد | اضغط على أي نقطة حمراء</span><span class="gsub">فلسطين في القلب — جرح مفتوح</span></div></section>
 <section id="finale"><canvas id="fincan"></canvas><div class="fin-inner"><div class="fin-rule"></div><span class="fin-key">🔑</span><h2 class="fin-headline">من النهر <em>إلى البحر</em></h2><p class="fin-sub">المفتاح لم يُفقد منذ 76 عاماً.<br>الأرض تتذكر أصحابها.<br><strong>ولن نصمت أبداً.</strong></p><div class="fin-tw" id="tw4"></div></div></section>
-
-<footer><div class="foot-left">فلسطين في القلب 🇵🇸</div><div class="foot-right"><div class="foot-flag" style="display:flex; gap:2px; margin-bottom:8px;"><span style="background:#111;width:14px;"></span><span style="background:#fff;width:14px;"></span><span style="background:#007a3d;width:14px;"></span><span style="background:#ce1126;width:14px;"></span></div>صُنعت هذه الصفحة لأن الصمت خيانة<br>@abramhaany</div></footer>
+<footer><div class="foot-left">فلسطين في القلب 🇵🇸</div><div class="foot-right"><div style="display:flex; gap:4px; margin-bottom:6px;"><span style="background:#111;width:14px;height:3px;"></span><span style="background:#fff;width:14px;height:3px;"></span><span style="background:#007a3d;width:14px;height:3px;"></span><span style="background:#ce1126;width:14px;height:3px;"></span></div>صُنعت هذه الصفحة لأن الصمت خيانة<br>@abramhaany</div></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+// ==== موسيقى + تفاعلات كروت + جلوب ثلاثي الأبعاد مع نقاط قابلة للنقر ====
 (function(){
-const aud = document.getElementById("aud");
-let musicOn = false;
-function tryAuto(){ aud.play().then(()=>{musicOn=true;}).catch(()=>{}); }
-window.toggleMusic = function(){
-  const bar = document.getElementById("mbar");
-  if(musicOn){ aud.pause(); musicOn=false; bar.classList.add("paused"); }
-  else { aud.play().then(()=>{musicOn=true;}).catch(()=>{}); bar.classList.remove("paused"); }
-};
-document.addEventListener("click", ()=> tryAuto(), {once:true});
-document.addEventListener("scroll", ()=> tryAuto(), {once:true});
+const aud=document.getElementById("aud"); let musicOn=false;
+window.toggleMusic=function(){ const bar=document.getElementById("mbar"); if(musicOn){ aud.pause(); musicOn=false; bar.classList.add("paused"); } else { aud.play().then(()=>{musicOn=true;}).catch(()=>{}); bar.classList.remove("paused"); } };
+document.addEventListener("click",()=>{ if(!musicOn) aud.play().then(()=>{musicOn=true;}).catch(()=>{}); },{once:true});
 
-function animateNumber(el, target, suffix='+'){ let start=null; const dur=2300; function step(t){ if(!start)start=t; let p=Math.min((t-start)/dur,1); let val=Math.floor(p*target); el.textContent=val.toLocaleString("ar-EG")+suffix; if(p<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
-setTimeout(()=>{ animateNumber(document.getElementById("c1"),17000); animateNumber(document.getElementById("c2"),21000); animateNumber(document.getElementById("c3"),6500,""); },400);
+function animateNumber(el,target,suffix='+'){ let start=null; const dur=2200; function step(t){ if(!start)start=t; let p=Math.min((t-start)/dur,1); let val=Math.floor(p*target); el.textContent=val.toLocaleString("ar-EG")+suffix; if(p<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
+setTimeout(()=>{ animateNumber(document.getElementById("c1"),17000); animateNumber(document.getElementById("c2"),21000); animateNumber(document.getElementById("c3"),6500,""); },300);
 
-function typewriter(elId, arr, loop=true){
-  const el=document.getElementById(elId); if(!el)return;
-  let idx=0, c=0, del=false; const curSpan=document.createElement("span"); curSpan.className="tw-cur"; el.appendChild(curSpan);
-  function tick(){
-    let txt=arr[idx];
-    if(!del){
-      c++; el.textContent=txt.slice(0,c); el.appendChild(curSpan);
-      if(c>=txt.length){ del=true; setTimeout(tick,2400); return; }
-      setTimeout(tick,55);
-    } else {
-      c--; el.textContent=txt.slice(0,c); el.appendChild(curSpan);
-      if(c<=0){ del=false; idx=(idx+1)%arr.length; if(!loop && idx===0) return; setTimeout(tick,450); return; }
-      setTimeout(tick,30);
-    }
-  } setTimeout(tick,700);
-}
+function typewriter(elId,arr,loop=true){ const el=document.getElementById(elId); if(!el)return; let idx=0,c=0,del=false; const curSpan=document.createElement("span"); curSpan.className="tw-cur"; el.appendChild(curSpan); function tick(){ let txt=arr[idx]; if(!del){ c++; el.textContent=txt.slice(0,c); el.appendChild(curSpan); if(c>=txt.length){ del=true; setTimeout(tick,2400); return; } setTimeout(tick,55); } else { c--; el.textContent=txt.slice(0,c); el.appendChild(curSpan); if(c<=0){ del=false; idx=(idx+1)%arr.length; if(!loop && idx===0) return; setTimeout(tick,450); return; } setTimeout(tick,30); } } setTimeout(tick,700); }
 
-const statsData = [{ico:"👶",n:17000,l:"طفل استُشهد منذ أكتوبر 2023",p:85},{ico:"🏥",n:21000,l:"طفل مفقود أو تحت الأنقاض",p:93},{ico:"🦽",n:10000,l:"طفل جُرح أو بُترت أطرافه",p:60},{ico:"📚",n:625000,l:"طفل حُرم من حق التعليم",p:97},{ico:"🍞",n:1000000,l:"طفل يعاني من سوء التغذية",p:88},{ico:"🏚",n:800000,l:"طفل شُرِّد من بيته وأرضه",p:80}];
-const statsGrid=document.getElementById("sg");
-statsData.forEach((d,i)=>{
-  const cell=document.createElement("div"); cell.className="stat-cell"; cell.setAttribute("data-p",d.p);
-  cell.innerHTML=`<span class="stat-icon">${d.ico}</span><span class="stat-num" data-t="${d.n}">٠</span><div class="stat-lbl">${d.l}</div><div class="stat-bar"><div class="stat-fill"></div></div>`;
-  statsGrid.appendChild(cell);
-});
+// stats interactive cards
+const statsData=[
+  {ico:"👶",n:17000,l:"طفل استُشهد منذ أكتوبر 2023",det:"أكثر من 17 ألف طفل استشهدوا برصاص الاحتلال والقصف. 40% منهم دون سن الخامسة.",p:85},
+  {ico:"🏥",n:21000,l:"طفل مفقود أو تحت الأنقاض",det:"21,000 طفل لا يزالون تحت الركام أو مفقودين. فرق الإنقاذ تعجز عن الوصول.",p:93},
+  {ico:"🦽",n:10000,l:"طفل جُرح أو بُترت أطرافه",det:"آلاف الأطفال أصيبوا بإعاقات دائمة وفقدوا أطرافهم في حرب غير مسبوقة.",p:60},
+  {ico:"📚",n:625000,l:"طفل حُرم من التعليم",det:"تدمير 85% من المدارس. جيل كامل خارج الفصول الدراسية.",p:97},
+  {ico:"🍞",n:1000000,l:"طفل يعاني من سوء التغذية",det:"مجاعة ممنهجة. طفل من كل اثنين في غزة يعاني الجوع الحاد.",p:88},
+  {ico:"🏚",n:800000,l:"طفل شُرِّد من بيته",det:"نزوح قسري متكرر. عائلات تنتقل 10 مرات في ظل القصف.",p:80}];
+const sg=document.getElementById("sg");
+statsData.forEach((d,i)=>{ const card=document.createElement("div"); card.className="stat-card"; card.dataset.p=d.p; card.innerHTML=`<span class="stat-icon">${d.ico}</span><span class="stat-num" data-t="${d.n}">٠</span><div class="stat-lbl">${d.l}</div><div class="stat-hover-detail">📌 ${d.det}</div><div class="stat-bar"><div class="stat-fill"></div></div>`; card.addEventListener("click",()=>{ card.classList.toggle("active"); }); sg.appendChild(card); });
 
-const kidsList = ["محمد الدرة","روان","يزن","رنا","أحمد","سارة","إبراهيم","لين","عمر","نور","خالد","هنا","فادي","ريم","مصطفى","دانا","طارق","ميار","جاد","علا","زياد","تالا","يوسف","نداء","ليلى","حسن","سلمى","كريم"];
-const ages = ["12","5 أشهر","4","7","9","3","11","6","13","2","8","10","14","1","16","5","7","11","4","8","15","6","3","9","5","10","7","12"];
+// memorial names & extra details
+const kidsList=["محمد الدرة","روان","يزن","رنا","أحمد","سارة","إبراهيم","لين","عمر","نور","خالد","هنا","فادي","ريم","مصطفى","دانا","طارق","ميار","جاد","علا","زياد","تالا","يوسف","نداء","ليلى","حسن","سلمى","كريم"];
+const ages=["12","5 أشهر","4","7","9","3","11","6","13","2","8","10","14","1","16","5","7","11","4","8","15","6","3","9","5","10","7","12"];
+const stories=["استشهد أمام والده في غزة","قُصفت منزلها وهي نائمة","كان يحب كرة القدم","فُقدت تحت الأنقاض لأسابيع","حلم بأن يصبح طبيباً","لم يتجاوز الثالثة","قصف مدرسته","كان يقرأ القرآن ليلة الاستشهاد","طفل موهوب في الرسم","اختفى في قصف متعمد","ضرب بصاروخ في الشارع","استشهد مع عائلته","قصف ملجأ الأونروا","كان يضحك قبل دقائق","جُرح ونزف دون رعاية","كانت تطارد الحمام","طفل متفوق في مدرسته","قصفت منزله فوقه","فقد ذراعه واستشهد","ارتقت مع أمها","أصيب في بطنه","عُثر على جسده بعد أسبوع","كان يلعب بالطائرة","أول أطفال عائلتها","كان يحب والدته","طفل هادئ وبريء","أصيب بجروح بالغة","قصف الطريق أثناء عودته"];
 const mg=document.getElementById("mg");
-kidsList.forEach((name,i)=>{
-  const row=document.createElement("div"); row.className="ledger-row";
-  row.innerHTML=`<span class="ledger-num">${String(i+1).padStart(2,'0')}</span><span class="ledger-name">👦 ${name}</span><span class="ledger-age">${ages[i]} سنوات</span><span class="ledger-candle">🕯️</span>`;
-  mg.appendChild(row);
-});
-const timeline = [{yr:"١٩٤٨",tt:"النكبة",tx:"تهجير 750,000 فلسطيني من أرضهم. دمار أكثر من 500 قرية."},{yr:"١٩٦٧",tt:"احتلال الضفة وغزة",tx:"احتلال الأراضي المتبقية وبدء الاستيطان."},{yr:"١٩٨٧",tt:"الانتفاضة الأولى",tx:"أطفال يواجهون الدبابات بالحجارة."},{yr:"٢٠٠٧ — الآن",tt:"حصار غزة",tx:"أكثر من 6500 يوم حصار. جيلان وُلدا في سجن مفتوح."},{yr:"أكتوبر ٢٠٢٣",tt:"الحرب على الأطفال",tx:"أكثر من 17,000 شهيد طفل. قصف المستشفيات والمدارس."}];
+kidsList.forEach((name,i)=>{ const row=document.createElement("div"); row.className="ledger-row"; row.innerHTML=`<span class="ledger-num">${String(i+1).padStart(2,'0')}</span><span class="ledger-name">👦 ${name}</span><span class="ledger-age">${ages[i]} سنوات</span><span class="ledger-candle">🕯️</span>`; row.addEventListener("click",()=>{ alert(`🕊️ ${name} · عمر ${ages[i]} سنة\n📖 التفاصيل: ${stories[i]}\nلن ننساه أبداً.`); }); mg.appendChild(row); });
+
+const timeline=[{yr:"١٩٤٨",tt:"النكبة",tx:"تهجير 750,000 فلسطيني, دمار 500 قرية. بداية المأساة المستمرة.",det:"مئات القرى مُسحت من الخريطة, واللاجئون ينتظرون العودة حتى اليوم."},{yr:"١٩٦٧",tt:"احتلال الضفة وغزة",tx:"احتلال باقي الأراضي. بداية الاستيطان غير الشرعي.",det:"القدس الشرقية والضفة وغزة تحت الاحتلال العسكري."},{yr:"١٩٨٧",tt:"الانتفاضة الأولى",tx:"أطفال يرشقون الدبابات بالحجارة.",det:"انتفاضة الحجارة أيقونة الصمود الفلسطيني."},{yr:"٢٠٠٧ — الآن",tt:"حصار غزة المفتوح",tx:"أكثر من 6500 يوم حصار. جيلان في سجن مفتوح.",det:"لا ماء نظيف ولا كهرباء كافية. حصار خانق."},{yr:"أكتوبر ٢٠٢٣",tt:"أشد الحروب دموية",tx:"أكثر من 17,000 طفل شهيد. دمار شامل.",det:"المستشفيات تُقصف. جحيم إنساني غير مسبوق."}];
 const tlWrap=document.getElementById("tlwrap");
-timeline.forEach(t=>{const div=document.createElement("div");div.className="tl-item";div.innerHTML=`<div class="tl-year">${t.yr}</div><div class="tl-title">${t.tt}</div><div class="tl-body">${t.tx}</div>`;tlWrap.appendChild(div);});
-const actionsArr = [{ic:"📢",t:"شارك وتحدث",x:"نشر الوعي يغير الرأي العام."},{ic:"✊",t:"لا تصمت أبداً",x:"تحدث أمام أصدقائك وعائلتك."},{ic:"🌍",t:"كن شاهداً",x:"وثِّق وانشر الحقيقة بلغات مختلفة."},{ic:"💙",t:"لا تنسى",x:"الذاكرة سلاح. اجعل فلسطين حاضرة."},{ic:"🤲",t:"ادعُ بلا توقف",x:"الدعاء لأهل غزة واجب."},{ic:"📱",t:"تابع وانشر",x:"المحتوى الواعي يستحق النشر."}];
+timeline.forEach(t=>{const div=document.createElement("div");div.className="tl-item";div.innerHTML=`<div class="tl-year">${t.yr}</div><div class="tl-title">${t.tt}</div><div class="tl-body">${t.tx}</div>`; div.addEventListener("click",()=>{ alert(`📜 تفاصيل أكثر: ${t.det}`); }); tlWrap.appendChild(div); });
+
+const actionsArr=[{ic:"📢",t:"شارك وتحدث",x:"انشر الحقيقة على منصاتك."},{ic:"✊",t:"لا تصمت أبداً",x:"تحدث أمام عائلتك وأصدقائك."},{ic:"🌍",t:"كن شاهداً",x:"وثق ونشر بلغات متعددة."},{ic:"💙",t:"لا تنسى",x":"الذاكرة الجماعية سلاح."},{ic:"🤲",t:"ادعُ بلا توقف",x":"الدعاء لأهل غزة واجب."},{ic:"📱",t:"تابع وانشر",x":"المحتوى الواعي يستحق النشر."}];
 const ag=document.getElementById("ag");
 actionsArr.forEach((a,i)=>{const c=document.createElement("div");c.className="action-cell";c.innerHTML=`<div class="ac-num">0${i+1}</div><span class="ac-icon">${a.ic}</span><div class="ac-title">${a.t}</div><div class="ac-text">${a.x}</div>`;ag.appendChild(c);});
-const tickerInner=document.getElementById("ticker");
-const quotes=["الطفل الفلسطيني وُلد ليبني وطنه لا ليموت تحت أنقاضه","غزة ليست أرقاماً — غزة أرواح وأحلام","الصمت تجاه قتل الأطفال ليس حياداً — هو تواطؤ","من النهر إلى البحر — فلسطين ستتحرر","الأرض تتذكر أصحابها منذ آلاف السنين","المفتاح لم يُفقد — والعودة حق لن يموت"];
-[...quotes,...quotes].forEach(q=>{const sp=document.createElement("span");sp.className="tick-item";sp.innerHTML=`<span class="tick-sep">◆</span> ${q}`;tickerInner.appendChild(sp);});
+const tickerInner=document.getElementById("ticker"); const quotes=["الطفل الفلسطيني وُلد ليبني وطنه","غزة أرواح وأحلام","الصمت تواطؤ","فلسطين ستتحرر","الأرض تتذكر","المفتاح لم يُفقد"]; [...quotes,...quotes].forEach(q=>{const sp=document.createElement("span");sp.className="tick-item";sp.innerHTML=`<span class="tick-sep">◆</span> ${q}`;tickerInner.appendChild(sp);});
 
-// Three.js Globe without floating flags
-const globeSec=document.getElementById("globesec"), canvas=document.getElementById("gcan");
-let scene, camera, renderer;
-function initGlobe(){
-  const w=globeSec.clientWidth, h=globeSec.clientHeight;
-  renderer=new THREE.WebGLRenderer({canvas,alpha:false});
-  renderer.setSize(w,h); renderer.setClearColor(0x030305);
+// === Globe 3D with interactive red dots (palestine data points)
+const canvas=document.getElementById("gcan"); const globeSec=document.getElementById("globesec");
+let scene,camera,renderer,raycaster,mouse,interactivePoints=[];
+function initInteractiveGlobe(){
+  const w=globeSec.clientWidth,h=globeSec.clientHeight;
+  renderer=new THREE.WebGLRenderer({canvas,alpha:false}); renderer.setSize(w,h); renderer.setClearColor(0x030305);
   scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(45,w/h,0.1,100); camera.position.z=3.6;
   const texCanvas=document.createElement("canvas"); texCanvas.width=1024; texCanvas.height=512;
-  const ctx=texCanvas.getContext("2d"); ctx.fillStyle="#1c1c1e"; ctx.fillRect(0,0,1024,170); ctx.fillStyle="#f0f0f0"; ctx.fillRect(0,170,1024,172); ctx.fillStyle="#007a3d"; ctx.fillRect(0,342,1024,170);
+  const ctx=texCanvas.getContext("2d"); ctx.fillStyle="#1c1c1e"; ctx.fillRect(0,0,1024,170); ctx.fillStyle="#e8e8e8"; ctx.fillRect(0,170,1024,172); ctx.fillStyle="#007a3d"; ctx.fillRect(0,342,1024,170);
   ctx.beginPath(); ctx.moveTo(1024,0); ctx.lineTo(700,256); ctx.lineTo(1024,512); ctx.closePath(); ctx.fillStyle="#ce1126"; ctx.fill();
   const texture=new THREE.CanvasTexture(texCanvas);
   const globeMat=new THREE.MeshPhongMaterial({map:texture,shininess:20});
-  const globe=new THREE.Mesh(new THREE.SphereGeometry(1.25,96,96),globeMat);
+  const globe=new THREE.Mesh(new THREE.SphereGeometry(1.25,128,128),globeMat);
   scene.add(globe);
-  const wire=new THREE.Mesh(new THREE.SphereGeometry(1.27,48,48),new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:0.05}));
-  scene.add(wire);
-  const ambient=new THREE.AmbientLight(0x404060); const dir=new THREE.DirectionalLight(0xffeedd,1.5); dir.position.set(3,2,4);
-  scene.add(ambient); scene.add(dir);
-  const point=new THREE.PointLight(0x992222,0.9,12); point.position.set(-2,1,3); scene.add(point);
-  function animate(){ requestAnimationFrame(animate); globe.rotation.y+=0.0025; wire.rotation.y+=0.0025; renderer.render(scene,camera); }
-  animate(); window.addEventListener("resize",()=>{ const nw=globeSec.clientWidth, nh=globeSec.clientHeight; renderer.setSize(nw,nh); camera.aspect=nw/nh; camera.updateProjectionMatrix(); });
+  // dots data (فلسطين - مدن و مخيمات)
+  const locations=[{lat:31.5,lon:34.5,name:"غزة",info:"أكثر من 17,000 طفل شهيد. حصار خانق وجوع."},{lat:31.9,lon:35.2,name:"القدس",info:"مدينة السلام المحتلة. أطفالها يقاومون."},{lat:32.2,lon:35.28,name:"نابلس",info:"اشتباكات مستمرة. أطفال يقبعون في السجون."},{lat:31.7,lon:35.2,name:"بيت لحم",info:"الميلاد يتحول إلى حزن. عشرات الشهداء."},{lat:31.53,lon:34.45,name:"خان يونس",info:"مقبرة جماعية. آلاف الأطفال تحت الأنقاض."},{lat:31.25,lon:34.3,name:"رفح",info:"معبر الألم. آلاف النازحين."}];
+  locations.forEach(loc=>{ const phi=(90-loc.lat)*Math.PI/180; const theta=loc.lon*Math.PI/180; const x=1.27*Math.sin(phi)*Math.cos(theta); const y=1.27*Math.cos(phi); const z=1.27*Math.sin(phi)*Math.sin(theta);
+    const dotGeo=new THREE.SphereGeometry(0.038,24,24); const dotMat=new THREE.MeshStandardMaterial({color:0xff3333,emissive:0x441111}); const marker=new THREE.Mesh(dotGeo,dotMat); marker.position.set(x,y,z); marker.userData={name:loc.name,details:loc.info}; scene.add(marker); interactivePoints.push(marker);
+    const pulseGeo=new THREE.SphereGeometry(0.068,12,12); const pulseMat=new THREE.MeshBasicMaterial({color:0xff6666,transparent:true,opacity:0.5}); const pulse=new THREE.Mesh(pulseGeo,pulseMat); marker.add(pulse); setInterval(()=>{ pulse.scale.setScalar(1); setTimeout(()=>{ pulse.scale.setScalar(1.8); },100); },1200);
+  });
+  const ambient=new THREE.AmbientLight(0x404060); const dir=new THREE.DirectionalLight(0xffeedd,1.4); dir.position.set(3,2,5); scene.add(ambient,dir);
+  raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
+  canvas.addEventListener("click",(event)=>{ const rect=canvas.getBoundingClientRect(); mouse.x=((event.clientX-rect.left)/rect.width)*2-1; mouse.y=-((event.clientY-rect.top)/rect.height)*2+1; raycaster.setFromCamera(mouse,camera); const intersects=raycaster.intersectObjects(interactivePoints); if(intersects.length>0){ const hit=intersects[0].object; const data=hit.userData; const tooltip=document.createElement("div"); tooltip.className="data-tooltip"; tooltip.innerHTML=`📍 ${data.name}<br>📢 ${data.details}<br>🕯️ لا ننسى أرواحهم.`; document.body.appendChild(tooltip); tooltip.style.left=event.clientX+15+"px"; tooltip.style.top=event.clientY-40+"px"; setTimeout(()=>{ tooltip.style.opacity="0"; setTimeout(()=>tooltip.remove(),300); },3000); } });
+  function animate(){ requestAnimationFrame(animate); globe.rotation.y+=0.0022; renderer.render(scene,camera); } animate();
+  window.addEventListener("resize",()=>{ const nw=globeSec.clientWidth,nh=globeSec.clientHeight; renderer.setSize(nw,nh); camera.aspect=nw/nh; camera.updateProjectionMatrix(); });
 }
-initGlobe();
+initInteractiveGlobe();
 
-// finale particles
-const finCan=document.getElementById("fincan"), finSec=document.getElementById("finale");
-let fscene,fcam,frender;
-function initFinale(){
-  const w=finSec.clientWidth, h=finSec.clientHeight;
-  frender=new THREE.WebGLRenderer({canvas:finCan,alpha:true}); frender.setSize(w,h);
-  fscene=new THREE.Scene(); fcam=new THREE.PerspectiveCamera(55,w/h,0.1,100); fcam.position.z=4.5;
-  const ptCount=700; const geom=new THREE.BufferGeometry(); const pos=[], cols=[];
-  for(let i=0;i<ptCount;i++){ const r=1.2+Math.random()*2.3; const theta=Math.random()*Math.PI*2, phi=Math.acos(2*Math.random()-1);
-    pos.push(r*Math.sin(phi)*Math.cos(theta), r*Math.sin(phi)*Math.sin(theta), r*Math.cos(phi));
-    const c=[0.78,0.18,0.22]; if(i%3===1) c[0]=0.9,c[1]=0.7,c[2]=0.4; cols.push(c[0],c[1],c[2]);
-  } geom.setAttribute("position",new THREE.BufferAttribute(new Float32Array(pos),3)); geom.setAttribute("color",new THREE.BufferAttribute(new Float32Array(cols),3));
-  const pointsMat=new THREE.PointsMaterial({size:0.045,vertexColors:true,transparent:true,opacity:0.5}); const pts=new THREE.Points(geom,pointsMat);
-  fscene.add(pts); fscene.add(new THREE.AmbientLight(0x222222));
-  function loop(){ requestAnimationFrame(loop); pts.rotation.y+=0.002; pts.rotation.x+=0.001; frender.render(fscene,fcam); } loop();
-  window.addEventListener("resize",()=>{ const nw=finSec.clientWidth, nh=finSec.clientHeight; frender.setSize(nw,nh); fcam.aspect=nw/nh; fcam.updateProjectionMatrix(); });
-}
-initFinale();
+// finale particles & observers
+const finCan=document.getElementById("fincan"),finSec=document.getElementById("finale"); let fscene,fcam,frender; function initFinaleParticles(){ const w=finSec.clientWidth,h=finSec.clientHeight; frender=new THREE.WebGLRenderer({canvas:finCan,alpha:true}); frender.setSize(w,h); fscene=new THREE.Scene(); fcam=new THREE.PerspectiveCamera(55,w/h,0.1,100); fcam.position.z=4.5; const ptCount=650; const geom=new THREE.BufferGeometry(); let pos=[],cols=[]; for(let i=0;i<ptCount;i++){ const r=1.3+Math.random()*2.2; const theta=Math.random()*Math.PI*2,phi=Math.acos(2*Math.random()-1); pos.push(r*Math.sin(phi)*Math.cos(theta), r*Math.sin(phi)*Math.sin(theta), r*Math.cos(phi)); const c=[0.8,0.2,0.25]; if(i%4===1) c[0]=0.9,c[1]=0.7,c[2]=0.3; cols.push(c[0],c[1],c[2]); } geom.setAttribute("position",new THREE.BufferAttribute(new Float32Array(pos),3)); geom.setAttribute("color",new THREE.BufferAttribute(new Float32Array(cols),3)); const pointsMat=new THREE.PointsMaterial({size:0.045,vertexColors:true,transparent:true,opacity:0.55}); const pts=new THREE.Points(geom,pointsMat); fscene.add(pts); fscene.add(new THREE.AmbientLight(0x222222)); function loop(){ requestAnimationFrame(loop); pts.rotation.y+=0.002; pts.rotation.x+=0.001; frender.render(fscene,fcam); } loop(); window.addEventListener("resize",()=>{ const nw=finSec.clientWidth,nh=finSec.clientHeight; frender.setSize(nw,nh); fcam.aspect=nw/nh; fcam.updateProjectionMatrix(); }); } initFinaleParticles();
 
-// intersection observer for animations
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("vis");
-    const fill=e.target.querySelector(".stat-fill"); if(fill && e.target.dataset.p) fill.style.width=e.target.dataset.p+"%";
-    const numSpan=e.target.querySelector(".stat-num"); if(numSpan && numSpan.dataset.t){ const val=parseInt(numSpan.dataset.t); animateNumber(numSpan,val,""); }
-    obs.unobserve(e.target);
-  } }); },{threshold:0.12});
-document.querySelectorAll(".stat-cell, .ledger-row, .action-cell, .tl-item").forEach(el=>obs.observe(el));
-const txtObs=new IntersectionObserver((e)=>{ e.forEach(entry=>{ if(entry.isIntersecting){ const id=entry.target.id;
-  if(id==="tw1") typewriter("tw1",["كل دقيقتين يُستشهد طفل في غزة...","أطفال غزة لم يختاروا الحرب — لكن الحرب اختارتهم","كانوا يلعبون ويضحكون ويحلمون — ثم جاءت القنابل"],true);
-  if(id==="tw2") typewriter("tw2",["17,000 شمعة أُطفئت قبل أوانها...","كل اسم منهم كان له أحلام وأسرة تحبه","لن تُنسى أسماؤهم — سيحملها التاريخ"],true);
-  if(id==="tw3") typewriter("tw3",["الصمت أمام الظلم شريك في الجريمة...","صوتك سلاحك — استخدمه قبل فوات الأوان","نشر الحقيقة واجب إنساني"],true);
-  if(id==="tw4") typewriter("tw4",["فلسطين حرة في قلوبنا — وستكون حرة على أرضها","المفتاح لم يُفقد — والعودة آتية","لن نصمت — لن ننسى — لن نتخلى عن فلسطين أبداً"],true);
-  txtObs.unobserve(entry.target); } }); },{threshold:0.4});
-["tw1","tw2","tw3","tw4"].forEach(id=>{ const el=document.getElementById(id); if(el) txtObs.observe(el); });
-document.getElementById("gt")?.classList.add("vis");
-document.getElementById("gs")?.classList.add("vis");
+const obs=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("vis"); const fill=e.target.querySelector(".stat-fill"); if(fill && e.target.dataset.p) fill.style.width=e.target.dataset.p+"%"; const numSpan=e.target.querySelector(".stat-num"); if(numSpan&&numSpan.dataset.t) animateNumber(numSpan,parseInt(numSpan.dataset.t),""); obs.unobserve(e.target); } }); },{threshold:0.12});
+document.querySelectorAll(".stat-card, .ledger-row, .action-cell, .tl-item").forEach(el=>obs.observe(el));
+const txtObs=new IntersectionObserver((e)=>{ e.forEach(entry=>{ if(entry.isIntersecting){ const id=entry.target.id; if(id==="tw1") typewriter("tw1",["كل دقيقتين طفل شهيد في غزة...","أطفال غزة لم يختاروا الحرب","كانوا يضحكون ويحلمون"],true); if(id==="tw2") typewriter("tw2",["17,000 شمعة أُطفئت","كل اسم له حكاية","لن تُنسى أبداً"],true); if(id==="tw3") typewriter("tw3",["الصمت تواطؤ","صوتك سلاح","الحقيقة تنتشر"],true); if(id==="tw4") typewriter("tw4",["فلسطين حرة","المفتاح لم يضع","لن نصمت أبداً"],true); txtObs.unobserve(entry.target); } }); },{threshold:0.4}); ["tw1","tw2","tw3","tw4"].forEach(id=>{const el=document.getElementById(id); if(el) txtObs.observe(el);});
 })();
 </script>
 </body>

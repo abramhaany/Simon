@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فلسطين — شاهد على العصر</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Noto+Naskh+Arabic:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--red:#b91c1c;--green:#15803d;--white:#f2ede4;--ink:#080808;--gold:#b45309;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--white);font-family:'Noto Naskh Arabic',serif;overflow-x:hidden;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.03;pointer-events:none;z-index:9000;}
+
+/* MUSIC */
+#mbar{position:fixed;top:1.5rem;left:1.5rem;z-index:800;display:flex;align-items:center;gap:.6rem;border:1px solid rgba(242,237,228,.15);border-radius:4px;padding:.5rem 1rem .5rem .6rem;background:rgba(8,8,8,.92);backdrop-filter:blur(10px);cursor:pointer;opacity:0;animation:fadein .6s ease 1.5s forwards;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:#777;transition:all .3s;}
+#mbar:hover{border-color:var(--red);color:var(--white);}
+.mwaves{display:flex;align-items:center;gap:2px;height:18px;}
+.mw{width:2px;border-radius:2px;background:var(--red);animation:mwave 1s ease-in-out infinite;}
+.mw:nth-child(1){height:6px;}.mw:nth-child(2){height:12px;animation-delay:.12s;}.mw:nth-child(3){height:8px;animation-delay:.24s;}.mw:nth-child(4){height:14px;animation-delay:.08s;}.mw:nth-child(5){height:5px;animation-delay:.32s;}
+@keyframes mwave{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
+#mbar.paused .mw{animation:none;transform:scaleY(.3);}
+@keyframes fadein{to{opacity:1;}}
+
+/* FLAGS */
+#flagbox{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden;}
+.fl{position:absolute;display:flex;flex-direction:column;opacity:0;animation:frise linear infinite;}
+@keyframes frise{0%{opacity:0;}6%{opacity:.5;}90%{opacity:.2;}100%{opacity:0;transform:translateY(-110vh);}}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;border-bottom:3px solid var(--red);}
+.masthead{padding:1.8rem 3rem 1.4rem;border-bottom:1px solid rgba(242,237,228,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.mdate{font-family:'Space Mono',monospace;font-size:.62rem;color:#555;letter-spacing:.15em;}
+.mtitle{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-style:italic;color:var(--white);}
+.hero-body{display:grid;grid-template-columns:1fr 1px 1fr;padding:3rem;align-items:center;gap:0;}
+.hleft{padding-left:2rem;display:flex;flex-direction:column;gap:2rem;}
+.hdivider{background:rgba(242,237,228,.08);margin:0 2rem;}
+.hright{padding-right:2rem;display:flex;flex-direction:column;gap:1.5rem;}
+.hkicker{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.25em;color:var(--red);}
+.hh1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,6.5rem);line-height:.9;font-weight:900;opacity:0;animation:slideup .9s ease .2s forwards;}
+.hh1 em{font-style:normal;color:var(--red);display:block;}
+.hdeck{font-size:clamp(.9rem,1.4vw,1.1rem);color:#999;line-height:1.8;border-right:3px solid var(--red);padding-right:1.2rem;opacity:0;animation:slideup .9s ease .5s forwards;}
+@keyframes slideup{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hcounters{display:flex;flex-direction:column;gap:.8rem;opacity:0;animation:slideup .9s ease .8s forwards;}
+.hcrow{display:flex;align-items:baseline;gap:1rem;border-bottom:1px solid rgba(242,237,228,.07);padding-bottom:.8rem;}
+.hcnum{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;color:var(--red);line-height:1;min-width:5ch;text-align:right;}
+.hclbl{font-size:.8rem;color:#666;line-height:1.4;}
+.hquote{font-family:'Playfair Display',serif;font-size:clamp(1rem,1.8vw,1.4rem);font-style:italic;color:#bbb;line-height:1.6;border:1px solid rgba(242,237,228,.1);padding:1.5rem 1.8rem;position:relative;opacity:0;animation:slideup .9s ease 1s forwards;}
+.hquote::before{content:'"';font-size:5rem;color:var(--red);opacity:.25;position:absolute;top:-.8rem;right:.5rem;font-family:'Playfair Display',serif;line-height:1;}
+.scue{padding:1.5rem 3rem;display:flex;align-items:center;gap:1rem;border-top:1px solid rgba(242,237,228,.07);opacity:0;animation:slideup .9s ease 1.4s forwards;}
+.scue-line{flex:1;height:1px;background:linear-gradient(to left,rgba(242,237,228,.12),transparent);}
+.scue-txt{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.2em;color:#444;}
+.scue-arr{color:var(--red);animation:bounce 2s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+/* ══ GLOBE UNIVERSE ══ */
+#universe{width:100%;height:100vh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#0a0f1a 0%,#000 70%);}
+#globeCanvas{position:absolute;inset:0;width:100%;height:100%;}
+
+/* INFO CARDS around globe */
+.info-card{
+  position:absolute;z-index:20;
+  background:rgba(8,8,8,.88);
+  border:1px solid rgba(242,237,228,.12);
+  border-radius:12px;
+  padding:.9rem 1.2rem;
+  max-width:200px;
+  opacity:0;
+  transform:scale(.85);
+  transition:opacity .5s, transform .5s;
+  pointer-events:none;
+  backdrop-filter:blur(10px);
+}
+.info-card.show{opacity:1;transform:scale(1);}
+.info-card.left{border-right:3px solid var(--red);}
+.info-card.right{border-left:3px solid var(--red);}
+.ic-icon{font-size:1.6rem;display:block;margin-bottom:.4rem;}
+.ic-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--red);line-height:1;}
+.ic-lbl{font-size:.72rem;color:#888;margin-top:.2rem;line-height:1.4;}
+
+/* connector lines */
+.connector{position:absolute;z-index:15;pointer-events:none;}
+
+/* globe center label */
+.globe-center-txt{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+  z-index:20;text-align:center;pointer-events:none;
+  opacity:0;transition:opacity 1s;
+}
+.globe-center-txt.show{opacity:1;}
+.gct-title{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2.5vw,2rem);font-style:italic;color:var(--white);}
+.gct-sub{font-size:.78rem;color:#666;margin-top:.3rem;letter-spacing:.05em;}
+
+/* TW STRIPS */
+.twstrip{background:var(--red);padding:4rem 3rem;position:relative;overflow:hidden;}
+.twstrip::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(0,0,0,.06) 40px,rgba(0,0,0,.06) 41px);}
+.twstrip.dark{background:#0f0f0f;border-top:1px solid rgba(185,28,28,.3);}
+.twstrip.dark .twbody{color:var(--white);}
+.twinner{position:relative;z-index:1;max-width:860px;margin:0 auto;}
+.twicon{font-size:3rem;display:block;margin-bottom:1.5rem;}
+.twbody{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2.4rem);font-style:italic;line-height:1.5;color:#fff;min-height:90px;}
+.twcur{display:inline-block;width:3px;height:.9em;background:#fff;margin-right:3px;animation:blink .7s step-end infinite;vertical-align:middle;}
+.dark .twcur{background:var(--red);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* STATS */
+.statsec{max-width:1300px;margin:0 auto;padding:6rem 3rem;}
+.seclbl{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.35em;color:var(--red);display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.seclbl::after{content:'';flex:1;height:1px;background:rgba(242,237,228,.08);}
+.sectitle{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900;line-height:1;margin-bottom:.4rem;}
+.statsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(242,237,228,.07);border:1px solid rgba(242,237,228,.07);margin-top:3rem;}
+.statcell{background:var(--ink);padding:2.5rem 2rem;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);transition:background .3s;}
+.statcell.vis{animation:cellin .6s ease forwards;}
+@keyframes cellin{to{opacity:1;transform:translateY(0);}}
+.statcell:hover{background:rgba(185,28,28,.07);}
+.statcell::before{content:attr(data-i);position:absolute;bottom:.8rem;left:1.2rem;font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:rgba(242,237,228,.025);line-height:1;}
+.sticon{font-size:1.8rem;margin-bottom:.8rem;display:block;}
+.stnum{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:900;color:var(--red);line-height:1;display:block;margin-bottom:.4rem;}
+.stlbl{font-size:.83rem;color:#777;line-height:1.6;}
+.stbar{margin-top:1.4rem;height:2px;background:rgba(242,237,228,.05);}
+.stfill{height:100%;background:var(--red);width:0;transition:width 1.8s ease;}
+
+/* TICKER */
+.ticker{background:var(--red);padding:.75rem 0;overflow:hidden;}
+.tickinner{display:flex;gap:0;white-space:nowrap;animation:ticka 50s linear infinite;}
+.tickinner:hover{animation-play-state:paused;}
+@keyframes ticka{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.tickitem{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:rgba(255,255,255,.85);padding:0 3rem;white-space:nowrap;display:inline-flex;align-items:center;gap:1rem;}
+
+/* MEMORIAL */
+.memsec{max-width:1300px;margin:0 auto;padding:6rem 3rem;}
+.ledger{border:1px solid rgba(242,237,228,.08);margin-top:3rem;}
+.ledgerhead{display:grid;grid-template-columns:3rem 1fr 6rem 5rem;gap:1rem;padding:.75rem 1.5rem;background:rgba(242,237,228,.04);border-bottom:1px solid rgba(242,237,228,.08);font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.15em;color:#444;}
+.ledgerrow{display:grid;grid-template-columns:3rem 1fr 6rem 5rem;gap:1rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(242,237,228,.04);opacity:0;transform:translateX(-15px);transition:background .2s;align-items:center;}
+.ledgerrow.vis{animation:rowslide .4s ease forwards;}
+@keyframes rowslide{to{opacity:1;transform:translateX(0);}}
+.ledgerrow:hover{background:rgba(185,28,28,.06);}
+.lnum{font-family:'Space Mono',monospace;font-size:.62rem;color:#333;}
+.lname{font-size:.9rem;font-weight:700;}
+.lage{font-family:'Space Mono',monospace;font-size:.72rem;color:#777;text-align:center;}
+.lcandle{text-align:center;font-size:1rem;animation:flick 2.5s ease-in-out infinite;}
+@keyframes flick{0%,100%{opacity:.7;}40%{opacity:1;transform:scale(1.1);}}
+
+/* TIMELINE */
+.tlsec{max-width:1300px;margin:0 auto;padding:6rem 3rem;}
+.tlwrap{position:relative;margin-top:3rem;padding-right:2.5rem;}
+.tlwrap::before{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--red) 10%,rgba(185,28,28,.3) 90%,transparent);}
+.tlitem{position:relative;padding:0 2.5rem 3.5rem 0;opacity:0;transform:translateY(18px);}
+.tlitem.vis{animation:cellin .7s ease forwards;}
+.tlitem::before{content:'';position:absolute;right:-5px;top:.35rem;width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(185,28,28,.2),0 0 14px rgba(185,28,28,.5);}
+.tlyr{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.2em;color:var(--red);margin-bottom:.4rem;}
+.tltt{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;margin-bottom:.5rem;}
+.tltx{font-size:.86rem;color:#777;line-height:1.8;max-width:600px;}
+
+/* ACTION */
+#action{background:var(--white);color:var(--ink);padding:6rem 3rem;}
+#action .inner{max-width:1000px;margin:0 auto;}
+.acth{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,6vw,5rem);font-weight:900;line-height:.9;margin-bottom:3rem;}
+.acth .acc{color:var(--red);}
+.actgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(8,8,8,.1);border:1px solid rgba(8,8,8,.1);margin-bottom:3rem;}
+.actcell{background:var(--white);padding:2rem 1.8rem;transition:background .3s;opacity:0;transform:translateY(18px);}
+.actcell.vis{animation:cellin .6s ease forwards;}
+.actcell:hover{background:#e8e0d2;}
+.actn{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:rgba(8,8,8,.07);line-height:1;margin-bottom:.4rem;}
+.actico{font-size:1.5rem;margin-bottom:.7rem;display:block;}
+.actit{font-weight:700;font-size:.92rem;margin-bottom:.35rem;}
+.acttx{font-size:.8rem;color:#666;line-height:1.7;}
+.ibtn{display:inline-flex;align-items:center;gap:.8rem;background:var(--ink);color:var(--white);padding:1rem 2.5rem;font-family:'Space Mono',monospace;font-size:.82rem;letter-spacing:.06em;text-decoration:none;transition:all .3s;border:2px solid var(--ink);}
+.ibtn:hover{background:var(--red);border-color:var(--red);}
+.ibtn svg{width:18px;height:18px;fill:currentColor;flex-shrink:0;}
+
+/* FINALE */
+#finale{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 3rem;position:relative;overflow:hidden;}
+#fincan{position:absolute;inset:0;z-index:0;}
+.fininner{position:relative;z-index:2;max-width:800px;}
+.finrule{width:70px;height:3px;background:var(--red);margin:0 auto 2rem;}
+.finkey{font-size:5rem;display:block;animation:keyfl 5s ease-in-out infinite;margin-bottom:1.5rem;}
+@keyframes keyfl{0%,100%{transform:rotate(-8deg) translateY(0);}50%{transform:rotate(8deg) translateY(-15px);}}
+.finh{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,8vw,7rem);font-weight:900;line-height:.9;}
+.finh em{font-style:italic;color:var(--red);display:block;}
+.finsub{margin-top:2rem;color:#777;line-height:1.9;max-width:440px;margin-inline:auto;}
+.finsub strong{color:var(--white);}
+.fintw{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,2vw,1.5rem);color:#888;min-height:60px;margin-top:1.5rem;}
+
+/* FOOTER */
+footer{background:#040404;padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(242,237,228,.05);}
+.ftl{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:#444;}
+.ftr{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;color:#2a2a2a;text-align:left;}
+.fflag{display:flex;height:3px;width:55px;overflow:hidden;border-radius:2px;margin-bottom:.4rem;}
+.fflag span{flex:1;}
+.ff1{background:#111;}.ff2{background:#fff;}.ff3{background:#007a3d;}.ff4{background:#ce1126;}
+
+@media(max-width:760px){
+  .hero-body{grid-template-columns:1fr;}.hdivider{display:none;}.hleft,.hright{padding:0;}
+  .masthead,.hero-body,.scue{padding-left:1.5rem;padding-right:1.5rem;}
+  .statsec,.memsec,.tlsec,.twstrip,#action{padding-left:1.5rem;padding-right:1.5rem;}
+  .ledgerhead,.ledgerrow{grid-template-columns:2.5rem 1fr 5rem;}
+  .lcandle{display:none;}
+  footer{flex-direction:column;} .ftr{text-align:right;}
+  #universe{height:60vh;}
+}
+</style>
+</head>
+<body>
+
+<audio id="aud" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div id="flagbox"></div>
+
+<div id="mbar" onclick="toggleMusic()">
+  <div class="mwaves">
+    <div class="mw"></div><div class="mw"></div><div class="mw"></div>
+    <div class="mw"></div><div class="mw"></div>
+  </div>
+  يا غزة قومي &nbsp;·&nbsp; حوده بندق
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="masthead">
+    <span class="mdate" id="mdate">جريدة الذاكرة · 2025</span>
+    <span class="mtitle">Palestine — شاهد على العصر</span>
+  </div>
+  <div class="hero-body">
+    <div class="hleft">
+      <span class="hkicker">▸ عاجل · نداء إنساني</span>
+      <h1 class="hh1">لا تصمت<em>أطفال فلسطين</em></h1>
+      <p class="hdeck">كل رقم على هذه الصفحة كان طفلاً يضحك ويحلم ويلعب. الصمت أمام هذا الظلم ليس حياداً — هو تواطؤ.</p>
+    </div>
+    <div class="hdivider"></div>
+    <div class="hright">
+      <div class="hcounters">
+        <div class="hcrow"><span class="hcnum" id="c1">٠</span><span class="hclbl">طفل استُشهد<br>منذ أكتوبر 2023</span></div>
+        <div class="hcrow"><span class="hcnum" id="c2">٠</span><span class="hclbl">طفل مفقود<br>أو تحت الأنقاض</span></div>
+        <div class="hcrow"><span class="hcnum" id="c3">٠</span><span class="hclbl">يوم حصار<br>لا يزال مستمراً</span></div>
+      </div>
+      <blockquote class="hquote">كل دقيقتين يُستشهد طفل في غزة. منذ أن فتحت هذه الصفحة، فقدنا أرواحاً بريئة.</blockquote>
+    </div>
+  </div>
+  <div class="scue">
+    <div class="scue-line"></div>
+    <span class="scue-txt">مرر للأسفل</span>
+    <span class="scue-arr">↓</span>
+  </div>
+</section>
+
+<!-- TW 1 -->
+<div class="twstrip">
+  <div class="twinner">
+    <span class="twicon">❤️</span>
+    <div class="twbody" id="tw1"></div>
+  </div>
+</div>
+
+<!-- GLOBE UNIVERSE -->
+<div id="universe">
+  <canvas id="globeCanvas"></canvas>
+
+  <!-- Info cards positioned around globe -->
+  <div class="info-card left" id="ic0" style="top:15%;right:72%;">
+    <span class="ic-icon">👶</span>
+    <div class="ic-num" data-t="17000">٠</div>
+    <div class="ic-lbl">طفل شهيد منذ أكتوبر 2023</div>
+  </div>
+
+  <div class="info-card left" id="ic1" style="top:38%;right:74%;">
+    <span class="ic-icon">🏥</span>
+    <div class="ic-num" data-t="21000">٠</div>
+    <div class="ic-lbl">طفل مفقود أو تحت الأنقاض</div>
+  </div>
+
+  <div class="info-card left" id="ic2" style="top:62%;right:72%;">
+    <span class="ic-icon">📚</span>
+    <div class="ic-num" data-t="625000">٠</div>
+    <div class="ic-lbl">طفل حُرم من التعليم</div>
+  </div>
+
+  <div class="info-card right" id="ic3" style="top:15%;left:72%;">
+    <span class="ic-icon">🦽</span>
+    <div class="ic-num" data-t="10000">٠</div>
+    <div class="ic-lbl">طفل جُرح أو بُتر</div>
+  </div>
+
+  <div class="info-card right" id="ic4" style="top:38%;left:74%;">
+    <span class="ic-icon">🍞</span>
+    <div class="ic-num" data-t="1000000">٠</div>
+    <div class="ic-lbl">طفل يعاني من سوء التغذية</div>
+  </div>
+
+  <div class="info-card right" id="ic5" style="top:62%;left:72%;">
+    <span class="ic-icon">🔑</span>
+    <div class="ic-num">76</div>
+    <div class="ic-lbl">عاماً والمفتاح لم يُفقد</div>
+  </div>
+
+  <svg id="connSvg" style="position:absolute;inset:0;width:100%;height:100%;z-index:16;pointer-events:none;"></svg>
+
+  <div class="globe-center-txt" id="gcttxt">
+    <div class="gct-title">فلسطين — قلب الكوكب</div>
+    <div class="gct-sub">مرر الصفحة للمتابعة ↓</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="statsec">
+  <div class="seclbl">الأرقام الحقيقية</div>
+  <h2 class="sectitle">الإحصاءات لا تكذب</h2>
+  <p style="color:#555;font-size:.88rem;margin-top:.4rem;">كل رقم وراءه روح وحكاية لم تُكتمل</p>
+  <div class="statsgrid" id="sg"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="tickinner" id="ticker"></div></div>
+
+<!-- TW 2 -->
+<div class="twstrip dark">
+  <div class="twinner">
+    <span class="twicon">🕯️</span>
+    <div class="twbody" id="tw2"></div>
+  </div>
+</div>
+
+<!-- MEMORIAL -->
+<section class="memsec">
+  <div class="seclbl">سجل الأرواح</div>
+  <h2 class="sectitle">كانوا هنا</h2>
+  <p style="color:#555;font-size:.88rem;margin-top:.4rem;">أسماء حقيقية لأطفال فلسطينيين رحلوا قبل أن يكبروا</p>
+  <div class="ledger">
+    <div class="ledgerhead"><span>#</span><span>الاسم</span><span style="text-align:center">العمر</span><span style="text-align:center">🕯️</span></div>
+    <div id="mg"></div>
+  </div>
+</section>
+
+<!-- TW 3 -->
+<div class="twstrip" style="background:#0a0a0a;border-top:1px solid rgba(185,28,28,.25);">
+  <div class="twinner">
+    <span class="twicon">✊</span>
+    <div class="twbody" id="tw3"></div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<section class="tlsec">
+  <div class="seclbl">التاريخ</div>
+  <h2 class="sectitle">جرح لم يندمل</h2>
+  <div class="tlwrap" id="tlwrap"></div>
+</section>
+
+<!-- ACTION -->
+<div id="action">
+  <div class="inner">
+    <h2 class="acth">صوتك<br><span class="acc">سلاحك.</span></h2>
+    <div class="actgrid" id="ag"></div>
+    <a href="https://www.instagram.com/abramhaany" target="_blank" class="ibtn">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      تابع @abramhaany
+    </a>
+  </div>
+</div>
+
+<!-- FINALE -->
+<section id="finale">
+  <canvas id="fincan"></canvas>
+  <div class="fininner">
+    <div class="finrule"></div>
+    <span class="finkey">🔑</span>
+    <h2 class="finh">من النهر<em>إلى البحر</em></h2>
+    <p class="finsub">المفتاح لم يُفقد منذ 76 عاماً. الأرض تتذكر أصحابها.<br><strong>ولن نصمت أبداً.</strong></p>
+    <div class="fintw" id="tw4"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftl">فلسطين في القلب 🇵🇸</div>
+  <div class="ftr">
+    <div class="fflag"><span class="ff1"></span><span class="ff2"></span><span class="ff3"></span><span class="ff4"></span></div>
+    صُنعت هذه الصفحة لأن الصمت خيانة<br>@abramhaany
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* DATE */
+document.getElementById("mdate").textContent = "جريدة الذاكرة · " + new Date().getFullYear();
+
+/* ── AUDIO ── */
+var aud = document.getElementById("aud");
+var musicOn = false;
+
+function tryPlay(){
+  if(!musicOn){ aud.play().then(function(){ musicOn=true; }).catch(function(){}); }
+}
+function toggleMusic(){
+  var bar = document.getElementById("mbar");
+  if(musicOn){ aud.pause(); musicOn=false; bar.classList.add("paused"); }
+  else { aud.play().then(function(){ musicOn=true; }).catch(function(){}); bar.classList.remove("paused"); }
+}
+window.toggleMusic = toggleMusic;
+function onFirst(){ tryPlay(); document.removeEventListener("click",onFirst); document.removeEventListener("scroll",onFirst); document.removeEventListener("touchstart",onFirst); }
+document.addEventListener("click",onFirst);
+document.addEventListener("scroll",onFirst);
+document.addEventListener("touchstart",onFirst);
+window.addEventListener("load",function(){ tryPlay(); });
+
+/* ── FLAGS ── */
+var fb = document.getElementById("flagbox");
+function spawnFlag(){
+  var f = document.createElement("div"); f.className="fl";
+  var sz=[16,22,30,40][Math.floor(Math.random()*4)], h=Math.round(sz*.6);
+  var dur=(Math.random()*15+11).toFixed(1), del=(Math.random()*4).toFixed(1);
+  f.style.cssText="left:"+(Math.random()*100).toFixed(1)+"%;bottom:-50px;width:"+sz+"px;height:"+h+"px;animation-duration:"+dur+"s;animation-delay:"+del+"s;";
+  f.innerHTML='<div style="flex:1;background:#111"></div><div style="flex:1;background:#fff"></div><div style="flex:1;background:#007a3d"></div><div style="position:absolute;left:0;top:0;bottom:0;border-style:solid;border-color:transparent transparent transparent #ce1126;border-width:'+(h/2)+'px 0 '+(h/2)+'px '+Math.round(sz*.28)+'px"></div>';
+  fb.appendChild(f);
+  setTimeout(function(){ f.remove(); },(parseFloat(dur)+parseFloat(del)+3)*1000);
+}
+for(var i=0;i<5;i++)(function(n){ setTimeout(spawnFlag,n*600); })(i);
+setInterval(spawnFlag,1500);
+
+/* ── COUNTER ── */
+function animCount(el,target,dur,suffix){
+  dur=dur||2600; suffix=suffix!==undefined?suffix:"+";
+  var st=null;
+  function step(ts){ if(!st)st=ts; var p=Math.min((ts-st)/dur,1),e=1-Math.pow(1-p,4); el.textContent=Math.floor(e*target).toLocaleString("ar-EG")+suffix; if(p<1)requestAnimationFrame(step); }
+  setTimeout(function(){ requestAnimationFrame(step); },400);
+}
+
+/* ── TYPEWRITER ── */
+function typewrite(elId,sentences,loop){
+  var el=document.getElementById(elId); if(!el)return;
+  var si=0,ci=0,del=false;
+  var cur=document.createElement("span"); cur.className="twcur"; el.appendChild(cur);
+  function tick(){
+    var txt=sentences[si];
+    if(!del){ ci++; el.textContent=txt.slice(0,ci); el.appendChild(cur); if(ci>=txt.length){del=true;setTimeout(tick,2500);return;} setTimeout(tick,62); }
+    else{ ci--; el.textContent=txt.slice(0,ci); el.appendChild(cur); if(ci<=0){del=false;si=(si+1)%sentences.length;if(!loop&&si===0){el.textContent=sentences[sentences.length-1];return;}setTimeout(tick,480);return;} setTimeout(tick,30); }
+  }
+  setTimeout(tick,700);
+}
+
+/* ── GLOBE with Palestine Flag ── */
+function initGlobe(){
+  var sec=document.getElementById("universe");
+  var canvas=document.getElementById("globeCanvas");
+  var W=sec.offsetWidth, H=sec.offsetHeight;
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(W,H);
+
+  var scene=new THREE.Scene();
+  var camera=new THREE.PerspectiveCamera(42,W/H,.1,100);
+  camera.position.z=4.2;
+
+  // Palestine flag texture on canvas
+  var fc=document.createElement("canvas"); fc.width=1024; fc.height=512;
+  var ctx=fc.getContext("2d");
+  // Black stripe
+  ctx.fillStyle="#101010"; ctx.fillRect(0,0,1024,170);
+  // White stripe
+  ctx.fillStyle="#f0ebe4"; ctx.fillRect(0,170,1024,172);
+  // Green stripe
+  ctx.fillStyle="#007a3d"; ctx.fillRect(0,342,1024,170);
+  // Red triangle (left side in RTL = right in UV map)
+  ctx.beginPath(); ctx.moveTo(1024,0); ctx.lineTo(690,256); ctx.lineTo(1024,512); ctx.closePath();
+  ctx.fillStyle="#ce1126"; ctx.fill();
+  // Subtle grid lines for globe feel
+  ctx.strokeStyle="rgba(255,255,255,0.04)"; ctx.lineWidth=1;
+  for(var gx=0;gx<1024;gx+=64){ ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,512); ctx.stroke(); }
+  for(var gy=0;gy<512;gy+=64){ ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(1024,gy); ctx.stroke(); }
+
+  var tex=new THREE.CanvasTexture(fc);
+
+  // Main globe
+  var globe=new THREE.Mesh(
+    new THREE.SphereGeometry(1.4,72,72),
+    new THREE.MeshPhongMaterial({map:tex,specular:new THREE.Color(0x111111),shininess:18})
+  );
+  scene.add(globe);
+
+  // Wireframe overlay
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1.42,28,28),
+    new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:.03})
+  ));
+
+  // Green atmosphere
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1.58,32,32),
+    new THREE.MeshBasicMaterial({color:0x007a3d,transparent:true,opacity:.06,side:THREE.BackSide})
+  ));
+
+  // Red glow outer
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1.7,32,32),
+    new THREE.MeshBasicMaterial({color:0xce1126,transparent:true,opacity:.03,side:THREE.BackSide})
+  ));
+
+  // Palestine dot
+  var dot=new THREE.Mesh(new THREE.SphereGeometry(.05,16,16),new THREE.MeshBasicMaterial({color:0xff2200}));
+  var lat=31.5*Math.PI/180, lon=35*Math.PI/180;
+  dot.position.set(1.45*Math.cos(lat)*Math.sin(lon),1.45*Math.sin(lat),1.45*Math.cos(lat)*Math.cos(lon));
+  globe.add(dot);
+
+  // Pulsing ring
+  var ring=new THREE.Mesh(
+    new THREE.RingGeometry(.065,.11,32),
+    new THREE.MeshBasicMaterial({color:0xff2200,transparent:true,opacity:.75,side:THREE.DoubleSide})
+  );
+  ring.position.copy(dot.position); ring.lookAt(0,0,0); globe.add(ring);
+
+  // Orbit particles with flag colors
+  var oN=300, oG=new THREE.BufferGeometry(), oP=new Float32Array(oN*3), oC=new Float32Array(oN*3);
+  var pal=[[.8,.07,.07],[0,.48,.24],[.94,.92,.89],[.06,.06,.06]];
+  for(var i=0;i<oN;i++){
+    var rr=1.9+Math.random()*.7, th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
+    oP[i*3]=rr*Math.sin(ph)*Math.cos(th); oP[i*3+1]=rr*Math.sin(ph)*Math.sin(th); oP[i*3+2]=rr*Math.cos(ph);
+    var cc=pal[i%4]; oC[i*3]=cc[0]; oC[i*3+1]=cc[1]; oC[i*3+2]=cc[2];
+  }
+  oG.setAttribute("position",new THREE.BufferAttribute(oP,3));
+  oG.setAttribute("color",new THREE.BufferAttribute(oC,3));
+  var orbPts=new THREE.Points(oG,new THREE.PointsMaterial({size:.03,vertexColors:true,transparent:true,opacity:.65}));
+  scene.add(orbPts);
+
+  // Lighting
+  scene.add(new THREE.AmbientLight(0xffffff,1.1));
+  var sun=new THREE.DirectionalLight(0xfff5e0,2.8); sun.position.set(5,4,6); scene.add(sun);
+  var fill=new THREE.PointLight(0x004422,1.5,12); fill.position.set(-5,-2,-4); scene.add(fill);
+  var redlight=new THREE.PointLight(0xce1126,0.8,10); redlight.position.set(3,-3,2); scene.add(redlight);
+
+  var t=0;
+  (function loop(){
+    requestAnimationFrame(loop);
+    t+=.005;
+    globe.rotation.y+=.004;
+    ring.scale.setScalar(1+.28*Math.sin(t*3));
+    orbPts.rotation.y-=.002;
+    orbPts.rotation.x+=.001;
+    renderer.render(scene,camera);
+  })();
+
+  window.addEventListener("resize",function(){
+    W=sec.offsetWidth; H=sec.offsetHeight;
+    renderer.setSize(W,H); camera.aspect=W/H; camera.updateProjectionMatrix();
+    drawConnectors();
+  });
+
+  // Show cards + connectors after globe visible
+  var gob=new IntersectionObserver(function(entries){
+    if(!entries[0].isIntersecting)return;
+    setTimeout(function(){
+      document.querySelectorAll(".info-card").forEach(function(c,i){
+        setTimeout(function(){ c.classList.add("show"); animCardNum(c); },i*250);
+      });
+      setTimeout(function(){ document.getElementById("gcttxt").classList.add("show"); drawConnectors(); },300);
+    },400);
+    gob.unobserve(sec);
+  },{threshold:.3});
+  gob.observe(sec);
+}
+
+function animCardNum(card){
+  var el=card.querySelector(".ic-num");
+  if(!el||!el.dataset.t)return;
+  animCount(el,parseInt(el.dataset.t),1800,"+");
+}
+
+/* Draw SVG connector lines from cards to globe center */
+function drawConnectors(){
+  var svg=document.getElementById("connSvg");
+  svg.innerHTML="";
+  var uni=document.getElementById("universe");
+  var cx=uni.offsetWidth/2, cy=uni.offsetHeight/2;
+  document.querySelectorAll(".info-card").forEach(function(card){
+    var r=card.getBoundingClientRect();
+    var ur=uni.getBoundingClientRect();
+    var cx2=r.left-ur.left+(r.left<ur.left+ur.width/2?r.width:0);
+    var cy2=r.top-ur.top+r.height/2;
+    var line=document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1",cx2); line.setAttribute("y1",cy2);
+    line.setAttribute("x2",cx); line.setAttribute("y2",cy);
+    line.setAttribute("stroke","rgba(185,28,28,0.35)");
+    line.setAttribute("stroke-width","1");
+    line.setAttribute("stroke-dasharray","4 4");
+    svg.appendChild(line);
+
+    // animated dot on line
+    var circle=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    circle.setAttribute("r","3"); circle.setAttribute("fill","#ce1126"); circle.setAttribute("opacity",".7");
+    var anim=document.createElementNS("http://www.w3.org/2000/svg","animateMotion");
+    anim.setAttribute("dur",(1.5+Math.random())+"s"); anim.setAttribute("repeatCount","indefinite");
+    anim.setAttribute("path","M"+cx2+","+cy2+" L"+cx+","+cy);
+    circle.appendChild(anim); svg.appendChild(circle);
+  });
+}
+
+/* ── FINALE 3D ── */
+function initFinale(){
+  var sec=document.getElementById("finale"), canvas=document.getElementById("fincan");
+  var renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(sec.offsetWidth,sec.offsetHeight);
+  var scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(60,sec.offsetWidth/sec.offsetHeight,.1,100);
+  camera.position.z=4;
+  var N=500,geo=new THREE.BufferGeometry(),pos=new Float32Array(N*3),col=new Float32Array(N*3),vel=[];
+  var p2=[[.73,.07,.07],[0,.48,.24],[.94,.92,.89]];
+  for(var i=0;i<N;i++){
+    var rr=Math.random()*3+.5,th=Math.random()*Math.PI*2,ph=Math.acos(2*Math.random()-1);
+    pos[i*3]=rr*Math.sin(ph)*Math.cos(th); pos[i*3+1]=rr*Math.sin(ph)*Math.sin(th); pos[i*3+2]=rr*Math.cos(ph);
+    vel.push({x:(Math.random()-.5)*.018,y:(Math.random()-.5)*.018,z:(Math.random()-.5)*.008});
+    var c=p2[i%3]; col[i*3]=c[0]; col[i*3+1]=c[1]; col[i*3+2]=c[2];
+  }
+  geo.setAttribute("position",new THREE.BufferAttribute(pos,3));
+  geo.setAttribute("color",new THREE.BufferAttribute(col,3));
+  var pts=new THREE.Points(geo,new THREE.PointsMaterial({size:.055,vertexColors:true,transparent:true,opacity:.65}));
+  scene.add(pts); scene.add(new THREE.AmbientLight(0xffffff,1));
+  var t=0;
+  (function loop(){
+    requestAnimationFrame(loop); t+=.007;
+    var p=geo.attributes.position.array;
+    for(var i=0;i<N;i++){ p[i*3]+=vel[i].x*Math.sin(t+i); p[i*3+1]+=vel[i].y*Math.cos(t+i*.7); p[i*3+2]+=vel[i].z*Math.sin(t*.5+i); }
+    geo.attributes.position.needsUpdate=true; pts.rotation.y+=.003;
+    renderer.render(scene,camera);
+  })();
+}
+
+/* ── BUILD FUNCTIONS ── */
+var SD=[{ico:"👶",n:17000,l:"طفل استُشهد منذ أكتوبر 2023",p:85},{ico:"🏥",n:21000,l:"طفل مفقود أو تحت الأنقاض",p:93},{ico:"🦽",n:10000,l:"طفل جُرح أو بُترت أطرافه",p:60},{ico:"📚",n:625000,l:"طفل حُرم من حق التعليم",p:97},{ico:"🍞",n:1000000,l:"طفل يعاني من سوء التغذية",p:88},{ico:"🏚",n:800000,l:"طفل شُرِّد من بيته وأرضه",p:80}];
+function buildStats(){
+  var sg=document.getElementById("sg");
+  SD.forEach(function(d,i){
+    var c=document.createElement("div"); c.className="statcell"; c.dataset.p=d.p; c.dataset.i="0"+(i+1); c.style.animationDelay=(i*.1)+"s";
+    c.innerHTML='<span class="sticon">'+d.ico+'</span><span class="stnum" data-t="'+d.n+'">٠</span><div class="stlbl">'+d.l+'</div><div class="stbar"><div class="stfill"></div></div>';
+    sg.appendChild(c);
+  });
+}
+
+var kids=[{n:"محمد الدرة",a:"12",e:"👦"},{n:"روان",a:"5 أشهر",e:"👶"},{n:"يزن",a:"4",e:"🧒"},{n:"رنا",a:"7",e:"👧"},{n:"أحمد",a:"9",e:"👦"},{n:"سارة",a:"3",e:"👶"},{n:"إبراهيم",a:"11",e:"🧒"},{n:"لين",a:"6",e:"👧"},{n:"عمر",a:"13",e:"👦"},{n:"نور",a:"2",e:"👶"},{n:"خالد",a:"8",e:"🧒"},{n:"هنا",a:"10",e:"👧"},{n:"فادي",a:"14",e:"👦"},{n:"ريم",a:"1",e:"👶"},{n:"مصطفى",a:"16",e:"🧒"},{n:"دانا",a:"5",e:"👧"},{n:"طارق",a:"7",e:"👦"},{n:"ميار",a:"11",e:"👧"},{n:"جاد",a:"4",e:"🧒"},{n:"علا",a:"8",e:"👧"},{n:"زياد",a:"15",e:"👦"},{n:"تالا",a:"6",e:"👧"},{n:"يوسف",a:"3",e:"🧒"},{n:"نداء",a:"9",e:"👧"},{n:"ليلى",a:"5",e:"👶"},{n:"حسن",a:"10",e:"👦"},{n:"سلمى",a:"7",e:"👧"},{n:"كريم",a:"12",e:"🧒"}];
+function buildMem(){
+  var mg=document.getElementById("mg");
+  kids.forEach(function(k,i){
+    var r=document.createElement("div"); r.className="ledgerrow"; r.style.animationDelay=(i*.04)+"s";
+    r.innerHTML='<span class="lnum">'+String(i+1).padStart(2,"0")+'</span><span class="lname">'+k.e+" "+k.n+'</span><span class="lage">'+k.a+' سنوات</span><span class="lcandle">🕯️</span>';
+    mg.appendChild(r);
+  });
+}
+
+var tlData=[{yr:"١٩٤٨",tt:"النكبة",tx:"تهجير 750,000 فلسطيني من أرضهم. دمار أكثر من 500 قرية. بداية اللجوء الذي امتد لأجيال."},{yr:"١٩٦٧",tt:"احتلال الضفة وغزة والقدس",tx:"احتلال الأراضي الفلسطينية المتبقية. بداية الاستيطان الذي لا يزال يتوسع."},{yr:"١٩٨٧",tt:"الانتفاضة الأولى",tx:"أطفال يواجهون الدبابات بالحجارة. صور هزّت ضمير العالم وأظهرت وجه المقاومة الشعبية."},{yr:"٢٠٠٧ — الآن",tt:"حصار غزة المفتوح",tx:"أكثر من 6500 يوم حصار. جيلان وُلدا داخل أكبر سجن مفتوح في التاريخ."},{yr:"أكتوبر ٢٠٢٣",tt:"أشد الحروب دموية على الأطفال",tx:'أكثر من 17,000 طفل شهيد. المستشفيات تُقصف، المدارس تُدمر. الأمم المتحدة: "جحيم على الأرض".',red:true}];
+function buildTl(){
+  var w=document.getElementById("tlwrap");
+  tlData.forEach(function(d,i){
+    var item=document.createElement("div"); item.className="tlitem"; item.style.animationDelay=(i*.1)+"s";
+    item.innerHTML='<div class="tlyr"'+(d.red?' style="color:var(--red)"':'')+'>'+d.yr+'</div><div class="tltt">'+d.tt+'</div><div class="tltx">'+d.tx+'</div>';
+    w.appendChild(item);
+  });
+}
+
+var acts=[{ic:"📢",t:"شارك وتحدث",x:"نشر الوعي على منصاتك يصل لملايين ويغير الرأي العام."},{ic:"✊",t:"لا تصمت أبداً",x:"تحدث أمام أصدقائك وعائلتك. الحقيقة لا تنتشر بدون أصوات."},{ic:"🌍",t:"كن شاهداً",x:"توثيق ما يحدث ونشره بلغات مختلفة يصنع فرقاً حقيقياً."},{ic:"💙",t:"لا تنسى",x:"الذاكرة الجماعية سلاح. اجعل فلسطين حاضرة في كل محادثة."},{ic:"🤲",t:"ادعُ بلا توقف",x:"الدعاء لأهل غزة واجب. كل دعوة صادقة تُحدث فرقاً."},{ic:"📱",t:"تابع وانشر",x:"المحتوى الواعي الذي يوثق الحقيقة يستحق النشر والمتابعة."}];
+function buildActions(){
+  var ag=document.getElementById("ag");
+  acts.forEach(function(a,i){
+    var c=document.createElement("div"); c.className="actcell"; c.style.animationDelay=(i*.1)+"s";
+    c.innerHTML='<div class="actn">0'+(i+1)+'</div><span class="actico">'+a.ic+'</span><div class="actit">'+a.t+'</div><div class="acttx">'+a.x+'</div>';
+    ag.appendChild(c);
+  });
+}
+
+function buildTicker(){
+  var qs=["الطفل الفلسطيني وُلد ليبني وطنه لا ليموت تحت أنقاضه","غزة ليست أرقاماً — غزة أرواح وأحلام وأطفال","الصمت تجاه قتل الأطفال تواطؤ","من النهر إلى البحر — فلسطين ستتحرر","الأرض تتذكر أصحابها منذ آلاف السنين","المفتاح لم يُفقد — والعودة حق لن يموت"];
+  var t=document.getElementById("ticker");
+  qs.concat(qs).forEach(function(q){ var el=document.createElement("span"); el.className="tickitem"; el.innerHTML='<span style="color:rgba(255,255,255,.3)">◆</span> '+q; t.appendChild(el); });
+}
+
+/* ── OBSERVER ── */
+function initObs(){
+  var ob=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target; el.classList.add("vis");
+      var fill=el.querySelector(".stfill");
+      if(fill)setTimeout(function(){ fill.style.width=(el.dataset.p||70)+"%"; },200);
+      var num=el.querySelector(".stnum");
+      if(num&&num.dataset.t) animCount(num,parseInt(num.dataset.t));
+      ob.unobserve(el);
+    });
+  },{threshold:.1});
+  document.querySelectorAll(".statcell,.ledgerrow,.actcell,.tlitem").forEach(function(el){ ob.observe(el); });
+
+  var twOb=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var id=e.target.id;
+      if(id==="tw1") typewrite("tw1",["كل دقيقتين يُستشهد طفل في غزة...","منذ أن فتحت هذه الصفحة فقدنا أرواحاً بريئة","أطفال غزة لم يختاروا الحرب — لكن الحرب اختارتهم","كانوا يلعبون ويضحكون — ثم جاءت القنابل"],true);
+      if(id==="tw2") typewrite("tw2",["17,000 شمعة أُطفئت قبل أوانها...","كل اسم منهم كان له أحلام وأسرة تحبه","لن تُنسى أسماؤهم — سيحملها التاريخ إلى الأبد","أرواحهم الصغيرة أكبر من كل هذا الظلم"],true);
+      if(id==="tw3") typewrite("tw3",["الصمت أمام الظلم شريك في الجريمة...","صوتك سلاحك — استخدمه قبل فوات الأوان","فلسطين قضية كل إنسان يؤمن بالعدل والكرامة","نشر الحقيقة واجب إنساني"],true);
+      if(id==="tw4") typewrite("tw4",["فلسطين حرة في قلوبنا — وستكون حرة على أرضها","المفتاح لم يُفقد — والعودة آتية بإذن الله","لن نصمت — لن ننسى — لن نتخلى عن فلسطين أبداً"],true);
+      twOb.unobserve(el);
+    });
+  },{threshold:.35});
+  ["tw1","tw2","tw3","tw4"].forEach(function(id){ var el=document.getElementById(id); if(el)twOb.observe(el); });
+}
+
+/* ── INIT ── */
+function init(){
+  animCount(document.getElementById("c1"),17000);
+  animCount(document.getElementById("c2"),21000);
+  animCount(document.getElementById("c3"),6500,2500,"");
+  buildStats(); buildMem(); buildTl(); buildActions(); buildTicker();
+  initGlobe(); initFinale(); initObs();
+}
+
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
+else init();
+
+})();
+</script>
+</body>
+</html>
